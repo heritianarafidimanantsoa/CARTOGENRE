@@ -1,5 +1,4 @@
 <script setup>
-// Importation du composant MapComponent
 import MapComponent from "@/components/maps.vue";
 </script>
 

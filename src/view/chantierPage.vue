@@ -91,7 +91,7 @@ const navigateToPage = (index) => {
         case 2:
             router.push("/toillete");
             break;
-        // Ajouter d'autres cas pour plus de slides
+
         default:
             break;
     }

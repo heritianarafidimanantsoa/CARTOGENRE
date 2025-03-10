@@ -36,7 +36,6 @@ onMounted(() => {
 });
 </script>
 <style scoped>
-/* Optionnel, ajuster la taille de la carte */
 #map {
     width: 100%;
     height: 100%;

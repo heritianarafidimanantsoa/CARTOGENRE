@@ -30,6 +30,4 @@ watch(
     </div>
 </template>
 
-<style scoped>
-/* Style global pour App.vue */
-</style>
+<style scoped></style>

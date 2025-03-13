@@ -16,7 +16,7 @@ import MapComponent from "@/components/maps.vue";
             <h1
                 class="text-3xl text-center font-poppins font-bold tracking-[.20em] mb-4"
             >
-                LES GENS A L’UF A TRAVERS UN CHANTIER ECOLE
+                LES GENRE A L’UF A TRAVERS UN CHANTIER ECOLE
             </h1>
             <p
                 class="text-left text-lg font-poppins font-light overflow-y-auto max-h-[calc(90%-150px)] scrollbar-hidden"

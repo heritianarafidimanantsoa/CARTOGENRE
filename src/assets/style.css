@@ -1,3 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+    --font-poppins: "Poppins", sans-serif;
+    --color-primary: #9ad35a;
+    --color-secondary: #582c4d;
+    --color-troisièmeNoir: #1c1c1c;
+}
+
 @font-face {
     font-family: "Poppins";
     font-style: normal;
@@ -140,13 +149,4 @@
     font-weight: 900;
     font-display: swap;
     src: url("../assets/fonts/Poppins-BlackItalic.ttf") format("woff2");
-}
-
-@import "tailwindcss";
-
-@theme {
-    --font-poppins: "Poppins", sans-serif;
-    --color-primary: #9ad35a;
-    --color-secondary: #582c4d;
-    --color-troisièmeNoir: #1c1c1c;
 }

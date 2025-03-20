@@ -34,15 +34,24 @@ export const routes = [
         path: "/vieAssociative",
         name: "VieAssociative",
         component: () => import("@/view/vieAssociative.vue"),
+        meta: { showNavbar: true },
     },
     {
         path: "/mobilite",
         name: "Mobilite",
         component: () => import("@/view/mobilite.vue"),
+        meta: { showNavbar: true },
     },
     {
         path: "/toillete",
         name: "Toillete",
         component: () => import("@/view/toillete.vue"),
+        meta: { showNavbar: true },
+    },
+    {
+        path: "/formulairePage",
+        name: "formulairePage",
+        component: () => import("@/view/formulairePage.vue"),
+        meta: { showNavbar: true },
     },
 ];

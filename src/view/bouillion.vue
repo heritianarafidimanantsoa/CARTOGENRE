@@ -1,3 +1,112 @@
+<!-- <button
+    class="absolute top-1/2 left-2 transform -translate-y-1/2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
+    @click="prevSlide('carte')"
+>
+                ‹
+            </button>
+<button
+    class="absolute top-1/2 right-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
+    @click="nextSlide('carte')"
+>
+                ›
+            </button> -->
+
+<!-- <div class="item">
+                    <img
+                        src="../assets/icon/quote-mark-svgrepo-com.svg"
+                        class="absolute top-2 right-8 opacity-50 w-12 h-12"
+                    />
+                    <h1>slider 2</h1>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores odit cum, voluptas dolorem mollitia delectus
+                    tenetur quibusdam ab ipsam quis ipsum odio vitae, quasi
+                    soluta nisi ipsa voluptate perferendis ullam.
+                </div>
+                <div class="item">
+                    <img
+                        src="../assets/icon/quote-mark-svgrepo-com.svg"
+                        class="absolute top-2 right-8 opacity-50 w-12 h-12"
+                    />
+                    <h1>slider 3</h1>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores odit cum, voluptas dolorem mollitia delectus
+                    tenetur quibusdam ab ipsam quis ipsum odio vitae, quasi
+                    soluta nisi ipsa voluptate perferendis ullam.
+                </div>
+                <div class="item">
+                    <img
+                        src="../assets/icon/quote-mark-svgrepo-com.svg"
+                        class="absolute top-2 right-8 opacity-50 w-12 h-12"
+                    />
+                    <h1>slider 4</h1>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores odit cum, voluptas dolorem mollitia delectus
+                    tenetur quibusdam ab ipsam quis ipsum odio vitae, quasi
+                    soluta nisi ipsa voluptate perferendis ullam.
+                </div>
+                <div class="item">
+                    <img
+                        src="../assets/icon/quote-mark-svgrepo-com.svg"
+                        class="absolute top-2 right-8 opacity-50 w-12 h-12"
+                    />
+                    <h1>slider 5</h1>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores odit cum, voluptas dolorem mollitia delectus
+                    tenetur quibusdam ab ipsam quis ipsum odio vitae, quasi
+                    soluta nisi ipsa voluptate perferendis ullam.
+                </div>
+                <div class="item">
+                    <img
+                        src="../assets/icon/quote-mark-svgrepo-com.svg"
+                        class="absolute top-2 right-8 opacity-50 w-12 h-12"
+                    />
+                    <h1 class="pt-10">slider 6</h1>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores odit cum, voluptas dolorem mollitia delectus
+                    tenetur quibusdam ab ipsam quis ipsum odio vitae, quasi
+                    soluta nisi ipsa voluptate perferendis ullam.
+                </div> -->
+
+<script setup>
+
+let items = document.querySelectorAll(".slider .item");
+let next = document.getElementById("next");
+let prev = document.getElementById("prev");
+
+let active = 3;
+function loadShow(){
+    let stt = 0;
+        items[active].style.transform = 'none';
+        items[active].style.zIndex = 1;
+        items[active].style.filter = 'none';
+        items[active].style.opacity = 1;
+    for(var i = active + 1; i < items.length; i++){
+        stt++;
+        items[i].style.transform = translateX(${120*sst}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg);
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(5px)';
+        items[i].style.opacity = sst > 2 ? 0 : 0.6;
+    }
+    stt = 0;
+    for(var i = active - 1; i >= 0; i--){
+        stt++;
+        items[i].style.transform = translateX(${-120*sst}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg);
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(5px)';
+        items[i].style.opacity = sst > 2 ? 0 : 0.6;
+    }
+}
+loadShow();
+next.onclick = function(){
+    active = active + 1 < items.length ? active +1 : active;
+    loadShow();
+}
+prev.onclick = function(){
+    active = active - 1 >= 0 ? active - 1 : active;
+    loadShow();
+}
+</script>
+
 <script setup>
 let nextDom = document.getElementById("next");
 let prevDom = document.getElementById("prev");

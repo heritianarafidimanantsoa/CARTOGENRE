@@ -12,9 +12,12 @@ onMounted(() => {
         const map = L.map("map").setView([-21.4633723, 47.1121022], 5);
 
         // Ajouter une couche OpenStreetMap
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: "&copy; OpenStreetMap contributors",
-        }).addTo(map);
+        L.tileLayer(
+            "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors",
+            }
+        ).addTo(map);
 
         // Charger le fichier GeoJSON depuis le dossier public
         fetch("/geojson/mobilit.geojson") // Chemin vers le fichier GeoJSON dans 'public'

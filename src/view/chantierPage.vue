@@ -12,11 +12,12 @@ const slides = ref([
     {
         id: 0,
         video: videoIntro,
-        title: "Les Genres dans",
+        title: "Les Genres dans la",
         subtitle: "THEMATIQUE",
         text: "VIE ASSOCIATIVE",
+        textprogres: "VIE ASSOCIATIVE",
         description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt sint natus excepturi recusandae temporibus exercitationem maiores! Illum facilis quis nostrum laborum cupiditate.",
+            "La vie associative est un facteur de gain en capital social et spatial pour les étudiants de l’université de Fianarantsoa. Souvent, les pratiques au sein de cet univers reproduisent des rôles et des attentes genrées, influençant l’attribution des rôles et des responsabilités, les interactions et les opportunités offertes aux individus.",
         buttons: [
             {
                 text: "EN SAVOIR PLUS",
@@ -31,11 +32,12 @@ const slides = ref([
     {
         id: 1,
         video: video2,
-        title: "Les Genres dans",
+        title: "Les Genres dans la",
         subtitle: "THEMATIQUE",
         text: "MOBILITES",
+        textprogres: "MOBILITES",
         description:
-            "Explorez l'univers fascinant des arts visuels et du théâtre. Découvrez les nouvelles tendances créatives.",
+            "Un campus fonctionnel et inclusif doit garantir une circulation fluide et sécurisée pour tous, permettant à chacun de rejoindre ses activités académiques et professionnelles dans des conditions optimales.",
         buttons: [
             {
                 text: "EN SAVOIR PLUS",
@@ -50,11 +52,12 @@ const slides = ref([
     {
         id: 2,
         video: video3,
-        title: "Les Genres dans",
+        title: "Les Genres dans la",
         subtitle: "THEMATIQUE",
         text: "TOILLETES",
+        textprogres: "TOILLETES",
         description:
-            "Plongez dans l'univers de l'innovation technologique et de la transformation numérique.",
+            "À l’Université de Fianarantsoa, une analyse des pratiques genrées révèle des disparités marquées entre étudiant·es, personnel administratif et enseignant·es, tant en termes d’accessibilité aux infrastructures sanitaires que de conditions d’usage.",
         buttons: [
             {
                 text: "EN SAVOIR PLUS",
@@ -303,16 +306,25 @@ onMounted(() => {
         </Transition>
 
         <!-- Barres de progression -->
-        <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-2">
+        <div class="absolute bottom-1 left-0 right-0 flex justify-center gap-2">
             <div
                 v-for="(slide, index) in slides"
                 :key="slide.id"
-                class="w-1/3 h-1 bg-gray-700 rounded overflow-hidden"
+                class="w-1/3 flex flex-col items-center"
             >
+                <!-- Barre de progression -->
+                <div class="h-1 bg-gray-700 rounded overflow-hidden w-full">
+                    <div
+                        class="h-1 bg-green-400 rounded transition-all duration-500"
+                        :style="{ width: `${progressBars[index]}%` }"
+                    ></div>
+                </div>
+                <!-- Titre sous la barre de progression -->
                 <div
-                    class="h-1 bg-green-400 rounded transition-all duration-500"
-                    :style="{ width: `${progressBars[index]}%` }"
-                ></div>
+                    class="text-white text-xs tracking-[5px] font-poppins font-bold mt-2 text-center drop-shadow-[0_1px_5px_#0007]"
+                >
+                    {{ slide.textprogres }}
+                </div>
             </div>
         </div>
 
@@ -326,7 +338,7 @@ onMounted(() => {
 
                 <button
                     @click="closeModal"
-                    class="z-50 close-btn absolute top-4 right-4 w-8 h-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-300 dark:focus:bg-neutral-600"
+                    class="z-50 close-btn absolute top-4 right-4 w-10 h-10 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-300 dark:focus:bg-neutral-600"
                 >
                     <span class="sr-only">Close</span>
                     <svg

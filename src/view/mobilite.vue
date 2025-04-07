@@ -1,30 +1,16 @@
 <template>
     <div class="flex gap-6 h-[639px] p-6 bg-gray-100">
-        <!-- Contenu dynamique en fonction de l'onglet sélectionné -->
-        <!-- Section Carte -->
+        <!-- Section du carrousel -->
         <div
             v-show="activeTab === 'carte'"
             class="w-1/2 shadow-md rounded-lg overflow-hidden relative"
         >
-            <div class="relative w-full h-full overflow-hidden">
-                <!-- Hauteur fixe ou dynamique -->
-                <div
-                    v-for="(image, index) in images"
-                    :key="index"
-                    :class="[
-                        'carousel-item inset-0 w-full h-full transition-all duration-500 ease-in-out',
-                        {
-                            block: currentIndex === index,
-                            hidden: currentIndex !== index,
-                        },
-                    ]"
-                >
-                    <img
-                        :src="image"
-                        class="block w-full h-full object-cover"
-                        alt="Carrousel Image"
-                    />
-                </div>
+            <div class="relative w-full h-full">
+                <img
+                    :src="images[currentIndex].src"
+                    class="block w-full h-full object-cover"
+                    :alt="images[currentIndex].title"
+                />
             </div>
             <!-- Contrôles du carrousel -->
             <button
@@ -41,75 +27,60 @@
             </button>
         </div>
 
-        <!-- Section Résultats -->
         <div
             v-show="activeTab === 'resultats'"
             class="w-1/2 shadow-md rounded-lg overflow-hidden relative"
         >
             <div class="relative w-full h-full">
-                <div
-                    v-for="(image, index) in resultImages"
-                    :key="index"
-                    :class="[
-                        'carousel-item inset-0 w-full h-full transition-all duration-500 ease-in-out',
-                        {
-                            block: currentResultIndex === index,
-                            hidden: currentResultIndex !== index,
-                        },
-                    ]"
-                >
-                    <img
-                        :src="image"
-                        class="block w-full h-full object-cover"
-                        alt="Image du carrousel statistiques"
-                    />
-                </div>
+                <img
+                    :src="resultImages[currentResultIndex].src"
+                    class="block w-full h-full object-cover"
+                    :alt="resultImages[currentResultIndex].title"
+                />
             </div>
             <!-- Contrôles du carrousel -->
             <button
-                class="absolute top-1/2 left-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition z-50"
+                class="absolute top-1/2 left-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
                 @click="prevSlide('resultats')"
             >
                 ‹
             </button>
             <button
-                class="absolute top-1/2 right-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition z-50"
+                class="absolute top-1/2 right-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
                 @click="nextSlide('resultats')"
             >
                 ›
             </button>
         </div>
 
-        <!-- Texte associé à chaque onglet -->
+        <!-- Texte associé à chaque slide -->
         <div
             class="w-1/2 bg-gray-800 shadow-md rounded-lg text-white flex flex-col"
         >
             <div class="p-6 flex-grow">
-                <div v-show="activeTab === 'carte'">
+                <div v-if="activeTab === 'carte'">
                     <h1
                         class="text-3xl text-center font-poppins font-bold tracking-[.20em] mb-4"
                     >
-                        CARTE MOBILITE
+                        {{ images[currentIndex].title }}
                     </h1>
                     <p class="text-lg font-light overflow-auto max-h-[350px]">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Corporis quod aliquid culpa, doloremque ipsa elit.
+                        {{ images[currentIndex].description }}
                     </p>
                 </div>
-                <div v-show="activeTab === 'resultats'">
+                <div v-if="activeTab === 'resultats'">
                     <h1
                         class="text-3xl text-center font-poppins font-bold tracking-[.20em] mb-4"
                     >
-                        RESULTATS STATISTIQUES
+                        {{ resultImages[currentResultIndex].title }}
                     </h1>
                     <p class="text-lg font-light overflow-auto max-h-[350px]">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Corporis quod aliquid culpa, doloremque ipsa elit.
+                        {{ resultImages[currentResultIndex].description }}
                     </p>
                 </div>
             </div>
 
-            <!-- Boutons pour changer l'affichage, placés en bas -->
+            <!-- Boutons pour changer de section -->
             <div class="grid grid-cols-2 gap-0.5 mt-auto">
                 <button
                     @click="activeTab = 'carte'"
@@ -151,32 +122,65 @@ import resultImage3 from "@/assets/img/3.jpg";
 
 const activeTab = ref("carte");
 
-const images = [videoIntro, videoIntro2, videoIntro3];
-const resultImages = [resultImage1, resultImage2, resultImage3];
+// Tableaux des images avec titres et descriptions
+const images = ref([
+    {
+        src: videoIntro,
+        title: "CARTE VIE ASSOCIATIVE",
+        description: "Description 1 sur la carte vie associative.",
+    },
+    {
+        src: videoIntro2,
+        title: "ACTIVITÉS ASSOCIATIVES",
+        description: "Description 2 des activités.",
+    },
+    {
+        src: videoIntro3,
+        title: "ÉVÉNEMENTS",
+        description: "Description 3 sur les événements.",
+    },
+]);
+
+const resultImages = ref([
+    {
+        src: resultImage1,
+        title: "RESULTATS STATISTIQUES",
+        description: "Statistiques 1 des résultats.",
+    },
+    {
+        src: resultImage2,
+        title: "ANALYSES COMPARATIVES",
+        description: "Statistiques 2 sur les analyses comparatives.",
+    },
+    {
+        src: resultImage3,
+        title: "DÉVELOPPEMENTS FUTURS",
+        description: "Statistiques 3 sur les futurs développements.",
+    },
+]);
 
 const currentIndex = ref(0);
 const currentResultIndex = ref(0);
 
-// Fonction pour passer à l'image suivante dans le carrousel
+// Fonction pour naviguer dans le carrousel
 const nextSlide = (type) => {
     if (type === "carte") {
-        currentIndex.value = (currentIndex.value + 1) % images.length;
-        console.log("currentIndex:", currentIndex.value); // Affiche l'indice actuel
+        currentIndex.value = (currentIndex.value + 1) % images.value.length;
     } else if (type === "resultats") {
         currentResultIndex.value =
-            (currentResultIndex.value + 1) % resultImages.length;
+            (currentResultIndex.value + 1) % resultImages.value.length;
     }
 };
 
-// Fonction pour passer à l'image précédente dans le carrousel
 const prevSlide = (type) => {
     if (type === "carte") {
         currentIndex.value =
-            (currentIndex.value - 1 + images.length) % images.length;
+            (currentIndex.value - 1 + images.value.length) %
+            images.value.length;
     } else if (type === "resultats") {
         currentResultIndex.value =
-            (currentResultIndex.value - 1 + resultImages.length) %
-            resultImages.length;
+            (currentResultIndex.value - 1 + resultImages.value.length) %
+            resultImages.value.length;
     }
 };
 </script>

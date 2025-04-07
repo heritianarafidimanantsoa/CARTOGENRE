@@ -1,64 +1,3 @@
-<script setup>
-import { ref, onMounted } from "vue";
-import MapComponent from "@/components/maps.vue";
-
-const slides = ref([
-    { id: 1, title: "2025-03-12", text: "Lorem ipsum dolor sit amet..." },
-    { id: 2, title: "2025-03-12", text: "Autres informations ici..." },
-    { id: 3, title: "2025-03-12", text: "Encore un autre texte..." },
-    { id: 4, title: "2025-03-12", text: "Du contenu dynamique..." },
-    { id: 5, title: "2025-03-12", text: "Une autre description..." },
-    { id: 6, title: "2025-03-12", text: "Dernier slide de la liste..." },
-    { id: 7, title: "2025-03-12", text: "Dernier slide de la liste..." },
-]);
-
-onMounted(() => {
-    let items = document.querySelectorAll(".slider .item");
-    let next = document.getElementById("next");
-    let prev = document.getElementById("prev");
-
-    let active = 3; // Initialisation de l'élément actif
-
-    function loadShow() {
-        let stt = 0;
-        items[active].style.transform = `none`;
-        items[active].style.zIndex = items.length;
-        items[active].style.filter = "none";
-        items[active].style.opacity = 1;
-
-        for (let i = active + 1; i < items.length; i++) {
-            stt++;
-            items[i].style.transform = `translateX(${120 * stt}px) scale(${
-                1 - 0.2 * stt
-            }) perspective(16px) rotateY(-1deg)`;
-            items[i].style.zIndex = items.length - stt;
-            items[i].style.filter = "blur(5px)";
-            items[i].style.opacity = stt > 2 ? 0 : 0.6;
-        }
-        stt = 0;
-        for (let i = active - 1; i >= 0; i--) {
-            stt++;
-            items[i].style.transform = `translateX(${-120 * stt}px) scale(${
-                1 - 0.2 * stt
-            }) perspective(16px) rotateY(1deg)`;
-            items[i].style.zIndex = items.length - stt;
-            items[i].style.filter = "blur(5px)";
-            items[i].style.opacity = stt > 2 ? 0 : 0.6;
-        }
-    }
-
-    loadShow();
-    next.onclick = () => {
-        active = active + 1 < items.length ? active + 1 : 0;
-        loadShow();
-    };
-    prev.onclick = () => {
-        active = active - 1 >= 0 ? active - 1 : items.length - 1;
-        loadShow();
-    };
-});
-</script>
-
 <template>
     <div class="flex flex-row w-full h-[639px] z-0">
         <!-- Section Texte -->
@@ -72,10 +11,6 @@ onMounted(() => {
                 class="title font-poppins font-bold text-[4em] leading-[1.3em] animate-slide-content"
             >
                 EXPRIMEZ-VOUS
-            </div>
-            <!-- Section MAPS -->
-            <div class="des w-full h-[350px] z-0">
-                <MapComponent />
             </div>
             <div
                 class="grid grid-cols-2 gap-5 mt-5 animate-slide-content justify-center items-center"
@@ -98,8 +33,10 @@ onMounted(() => {
                         src="../assets/icon/quote-mark-svgrepo-com.svg"
                         class="absolute top-2 right-8 opacity-50 w-15 h-15"
                     />
-                    <h1 class="opacity-50 text-[13px]">{{ slide.title }}</h1>
-                    <p class="pt-10">{{ slide.text }}</p>
+                    <h1 class="opacity-50 text-[13px]">
+                        {{ slide.title || "Date inconnue" }}
+                    </h1>
+                    <p class="pt-10">{{ slide.text || "Aucun message..." }}</p>
                 </div>
 
                 <button id="prev">
@@ -141,7 +78,87 @@ onMounted(() => {
             </div>
         </div>
     </div>
+
+    <!-- Section MAPS -->
+    <div class="h-[639px] w-full z-0">
+        <DonneCarte />
+    </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import DonneCarte from "@/components/affichedonnecarte.vue";
+
+const slides = ref([]);
+
+const fetchFeedbacks = async () => {
+    try {
+        const response = await fetch("http://localhost/fetch_feedbacks.php");
+        const data = await response.json();
+        slides.value = data.map((item, index) => ({
+            id: item.id || index + 1,
+            title: item.created_at ? item.created_at.split(" ")[0] : "",
+            text: item.message || "",
+        }));
+    } catch (error) {
+        console.error("Erreur lors du chargement des feedbacks:", error);
+    }
+};
+
+onMounted(() => {
+    fetchFeedbacks();
+    const interval = setInterval(fetchFeedbacks, 5000);
+
+    let items;
+    let next;
+    let prev;
+    let active = 3;
+
+    setTimeout(() => {
+        items = document.querySelectorAll(".slider .item");
+        next = document.getElementById("next");
+        prev = document.getElementById("prev");
+
+        const loadShow = () => {
+            let stt = 0;
+            items[active].style.transform = `none`;
+            items[active].style.zIndex = items.length;
+            items[active].style.filter = "none";
+            items[active].style.opacity = 1;
+
+            for (let i = active + 1; i < items.length; i++) {
+                stt++;
+                items[i].style.transform = `translateX(${120 * stt}px) scale(${
+                    1 - 0.2 * stt
+                }) perspective(16px) rotateY(-1deg)`;
+                items[i].style.zIndex = items.length - stt;
+                items[i].style.filter = "blur(5px)";
+                items[i].style.opacity = stt > 2 ? 0 : 0.6;
+            }
+            stt = 0;
+            for (let i = active - 1; i >= 0; i--) {
+                stt++;
+                items[i].style.transform = `translateX(${-120 * stt}px) scale(${
+                    1 - 0.2 * stt
+                }) perspective(16px) rotateY(1deg)`;
+                items[i].style.zIndex = items.length - stt;
+                items[i].style.filter = "blur(5px)";
+                items[i].style.opacity = stt > 2 ? 0 : 0.6;
+            }
+        };
+
+        loadShow();
+        next.onclick = () => {
+            active = active + 1 < items.length ? active + 1 : 0;
+            loadShow();
+        };
+        prev.onclick = () => {
+            active = active - 1 >= 0 ? active - 1 : items.length - 1;
+            loadShow();
+        };
+    }, 500);
+});
+</script>
 
 <style>
 .contents {

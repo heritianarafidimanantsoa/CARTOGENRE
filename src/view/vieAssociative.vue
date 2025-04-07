@@ -1,14 +1,16 @@
 <template>
-    <div class="flex gap-6 h-[639px] p-6 bg-gray-100">
+    <div
+        class="flex flex-col lg:flex-row gap-6 h-auto lg:h-[639px] p-6 bg-gray-100"
+    >
         <!-- Section du carrousel -->
         <div
             v-show="activeTab === 'carte'"
-            class="w-1/2 shadow-md rounded-lg overflow-hidden relative"
+            class="w-full lg:w-1/2 shadow-md rounded-lg overflow-hidden relative"
         >
-            <div class="relative w-full h-full">
+            <div class="relative w-full h-[300px] lg:h-full">
                 <img
                     :src="images[currentIndex].src"
-                    class="block w-full h-full object-cover"
+                    class="block transition duration-500"
                     :alt="images[currentIndex].title"
                 />
             </div>
@@ -16,12 +18,14 @@
             <button
                 class="absolute top-1/2 left-2 transform -translate-y-1/2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
                 @click="prevSlide('carte')"
+                aria-label="Image précédente"
             >
                 ‹
             </button>
             <button
                 class="absolute top-1/2 right-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
                 @click="nextSlide('carte')"
+                aria-label="Image suivante"
             >
                 ›
             </button>
@@ -29,25 +33,25 @@
 
         <div
             v-show="activeTab === 'resultats'"
-            class="w-1/2 shadow-md rounded-lg overflow-hidden relative"
+            class="flex flex-col w-full lg:w-1/2 bg-white shadow-lg rounded-2xl p-15 relative"
         >
-            <div class="relative w-full h-full">
-                <img
-                    :src="resultImages[currentResultIndex].src"
-                    class="block w-full h-full object-cover"
-                    :alt="resultImages[currentResultIndex].title"
-                />
+            <!-- Conteneur du graphique -->
+            <div class="relative flex-grow min-h-[300px]">
+                <canvas ref="chartCanvas" class="w-full h-full"></canvas>
             </div>
-            <!-- Contrôles du carrousel -->
+
+            <!-- Contrôles du graphique -->
             <button
-                class="absolute top-1/2 left-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
+                class="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white bg-opacity-60 hover:bg-opacity-90 transition"
                 @click="prevSlide('resultats')"
+                aria-label="Graphique précédent"
             >
                 ‹
             </button>
             <button
-                class="absolute top-1/2 right-2 px-4 py-2 bg-gray-700 text-white bg-opacity-50 hover:bg-opacity-75 rounded-full transition"
+                class="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white bg-opacity-60 hover:bg-opacity-90 transition"
                 @click="nextSlide('resultats')"
+                aria-label="Graphique suivant"
             >
                 ›
             </button>
@@ -55,64 +59,98 @@
 
         <!-- Texte associé à chaque slide -->
         <div
-            class="w-1/2 bg-gray-800 shadow-md rounded-lg text-white flex flex-col"
+            class="w-full lg:w-1/2 bg-[#1e293b] shadow-md rounded-lg text-white flex flex-col"
         >
-            <div class="p-6 flex-grow">
+            <div class="p-6 flex-grow overflow-auto">
                 <div v-if="activeTab === 'carte'">
+                    <!-- Badge -->
+                    <div
+                        class="inline-block px-3 py-1 mb-4 text-xs font-semibold uppercase tracking-wider bg-blue-900 text-blue-300 rounded-full"
+                    >
+                        CARTE
+                    </div>
+
+                    <!-- Titre -->
                     <h1
-                        class="text-3xl text-center font-poppins font-bold tracking-[.20em] mb-4"
+                        class="text-2xl md:text-3xl text-left font-poppins font-bold uppercase tracking-wide mb-2"
                     >
                         {{ images[currentIndex].title }}
                     </h1>
-                    <p class="text-lg font-light overflow-auto max-h-[350px]">
+
+                    <!-- Ligne -->
+                    <hr class="border-gray-600 mb-4" />
+
+                    <!-- Texte -->
+                    <p
+                        class="text-base md:text-lg font-light leading-relaxed text-gray-300"
+                    >
                         {{ images[currentIndex].description }}
                     </p>
                 </div>
+
                 <div v-if="activeTab === 'resultats'">
+                    <!-- Badge -->
+                    <div
+                        class="inline-block px-3 py-1 mb-4 text-xs font-semibold uppercase tracking-wider bg-blue-900 text-blue-300 rounded-full"
+                    >
+                        STATISTIQUES
+                    </div>
+
+                    <!-- Titre -->
                     <h1
-                        class="text-3xl text-center font-poppins font-bold tracking-[.20em] mb-4"
+                        class="text-2xl md:text-3xl text-left font-poppins font-bold uppercase tracking-wide mb-2"
                     >
                         {{ resultImages[currentResultIndex].title }}
                     </h1>
-                    <p class="text-lg font-light overflow-auto max-h-[350px]">
+
+                    <!-- Ligne -->
+                    <hr class="border-gray-600 mb-4" />
+
+                    <!-- Texte -->
+                    <p
+                        class="text-base md:text-lg font-light leading-relaxed text-gray-300"
+                    >
                         {{ resultImages[currentResultIndex].description }}
                     </p>
                 </div>
             </div>
 
-            <!-- Boutons pour changer de section -->
-            <div class="grid grid-cols-2 gap-0.5 mt-auto">
+            <!-- Boutons de navigation -->
+            <div class="grid grid-cols-2 mt-auto border-t border-gray-700">
                 <button
                     @click="activeTab = 'carte'"
                     :class="{
-                        'bg-transparent text-white': activeTab === 'carte',
-                        'bg-gray-600 text-white hover:bg-gray-500':
+                        'bg-gray-900 text-white': activeTab === 'carte',
+                        'bg-gray-700 text-gray-300 hover:text-white':
                             activeTab !== 'carte',
                     }"
-                    class="flex-1 px-4 py-3 font-semibold rounded-bl-lg transition"
+                    class="flex items-center justify-center px-4 py-3 font-semibold rounded-bl-lg transition uppercase text-sm gap-2"
                 >
-                    <i class="fas fa-user-graduate mr-2"></i> CARTE
+                    <i class="fas fa-map-marked-alt"></i> Carte
                 </button>
                 <button
                     @click="activeTab = 'resultats'"
                     :class="{
-                        'bg-transparent text-white': activeTab === 'resultats',
-                        'bg-gray-600 text-white hover:bg-gray-500':
+                        'bg-gray-900 text-white': activeTab === 'resultats',
+                        'bg-gray-700 text-gray-300 hover:text-white':
                             activeTab !== 'resultats',
                     }"
-                    class="flex-1 px-4 py-3 font-semibold rounded-br-lg transition"
+                    class="flex items-center justify-center px-4 py-3 font-semibold rounded-br-lg transition uppercase text-sm gap-2"
                 >
-                    <i class="fas fa-chart-bar mr-2"></i> RÉSULTATS STATISTIQUES
+                    <i class="fas fa-chart-bar"></i> Statistiques
                 </button>
             </div>
         </div>
     </div>
+    <Footer />
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch, onMounted } from "vue";
+import { Chart, registerables } from "chart.js";
+import Footer from "@/components/footer.vue";
 
-// Importation des images
+// Images du carrousel
 import videoIntro from "@/assets/img/image1.jpg";
 import videoIntro2 from "@/assets/img/image2.jpg";
 import videoIntro3 from "@/assets/img/image3.jpg";
@@ -120,9 +158,10 @@ import resultImage1 from "@/assets/img/1.jpg";
 import resultImage2 from "@/assets/img/2.jpg";
 import resultImage3 from "@/assets/img/3.jpg";
 
+// Onglet actif
 const activeTab = ref("carte");
 
-// Tableaux des images avec titres et descriptions
+// Données images et graphiques
 const images = ref([
     {
         src: videoIntro,
@@ -144,25 +183,50 @@ const images = ref([
 const resultImages = ref([
     {
         src: resultImage1,
-        title: "RESULTATS STATISTIQUES",
-        description: "Statistiques 1 des résultats.",
+        title: "REPARTITION GENREE DES POSTES DE PRESIDENT DES ASSOCIATIONS",
+        description: `
+                    « Mais en général, heu… on les [les décisions] prend tous ensemble ! En fait, quand… c’est le président, oui, là alors… là, peut-être qu’il y a un peu de différence parce que les femmes n’ont pas le droit de… heu… d’être élues présidentes dans l’association… chez nous ! Mais j’sais pas chez les autres… oui voilà en fait ! Il y avait ça… »
+
+                    La répartition genrée des postes de présidence reflète les normes sociales traditionnelles malgaches. Le graphique met en évidence une forte prédominance masculine à ces postes, une tendance qui s'explique par des représentations culturelles où les rôles de leadership restent majoritairement attribués aux hommes.
+                    Dans ce contexte, même si les décisions peuvent être prises collectivement, l’accès des femmes à la présidence reste limité par des habitudes et des croyances profondément ancrées. Cette dynamique, issue des structures sociales et familiales, influence les associations étudiantes, où la légitimité du pouvoir demeure souvent perçue comme masculine. Ainsi, la répartition observée ne relève pas seulement d’un choix individuel, mais s’inscrit dans un cadre social plus large qui façonne les opportunités et les attentes liées au genre.
+                    `,
+
+        chartData: {
+            labels: ["Homme", "Femme"],
+            data: [36, 1],
+        },
     },
     {
         src: resultImage2,
-        title: "ANALYSES COMPARATIVES",
-        description: "Statistiques 2 sur les analyses comparatives.",
+        title: "REPARTITION GENREE DES MEMBRES DES ASSOCIATIONS",
+        description: `
+                    « Premièrement ça m’aide à avoir un logement » « Je suis rentrée dans l’association pour les bâtiments »
+                        Le graphique met en évidence des différences de participation entre les hommes et les femmes, influencées par les rôles traditionnels associés à chaque genre dans la société malgache.
+                        Les hommes sont souvent plus présents dans ces associations, car l'engagement associatif, notamment dans les espaces de représentation et de prise de décision, est perçu comme un prolongement des responsabilités et de l'autorité qui leur sont socialement attribuées. À l'inverse, les femmes peuvent être moins nombreuses en raison des attentes qui pèsent sur elles en matière de priorités académiques et familiales, ou encore par une moindre légitimité perçue dans ces espaces collectifs.
+                        Ainsi, cette répartition ne reflète pas seulement des choix individuels, mais s'inscrit dans un cadre où les normes de genre influencent les formes d'engagement au sein du campus.
+
+                    `,
+        chartData: {
+            labels: ["Homme", "Femme"],
+            data: [43, 12],
+        },
     },
     {
         src: resultImage3,
         title: "DÉVELOPPEMENTS FUTURS",
         description: "Statistiques 3 sur les futurs développements.",
+        chartData: {
+            labels: ["Scénario 1", "Scénario 2", "Scénario 3"],
+            data: [20, 50, 30],
+        },
     },
 ]);
 
+// Index des slides
 const currentIndex = ref(0);
 const currentResultIndex = ref(0);
 
-// Fonction pour naviguer dans le carrousel
+// Navigation
 const nextSlide = (type) => {
     if (type === "carte") {
         currentIndex.value = (currentIndex.value + 1) % images.value.length;
@@ -183,6 +247,62 @@ const prevSlide = (type) => {
             resultImages.value.length;
     }
 };
+
+// Chart.js
+Chart.register(...registerables);
+const chartCanvas = ref(null);
+let chartInstance = null;
+
+const renderChart = () => {
+    const current = resultImages.value[currentResultIndex.value];
+
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(chartCanvas.value, {
+        type: "bar",
+        data: {
+            labels: current.chartData.labels,
+            datasets: [
+                {
+                    label: current.title,
+                    data: current.chartData.data,
+                    backgroundColor: ["#60a5fa", "#f87171", "#fbbf24"],
+                    borderColor: "#000",
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+};
+
+onMounted(() => {
+    renderChart();
+});
+
+watch(currentResultIndex, () => {
+    renderChart();
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Transition fade optionnelle */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

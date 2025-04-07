@@ -1,19 +1,17 @@
 <script setup>
 import { ref, onMounted, watch, nextTick } from "vue";
-import { useRouter } from "vue-router"; // Importer useRouter pour la navigation
+import { useRouter } from "vue-router";
 
-// Importation des vidéos locales
 import videoIntro from "@/assets/img/slide1.mp4";
 import video2 from "@/assets/img/videoIntro.mp4";
 import video3 from "@/assets/img/slide3.mp4";
 
-// Déclaration du tableau des slides
 const slides = ref([
     {
         id: 0,
         video: videoIntro,
-        title: "Les Genres dans la",
-        subtitle: "THEMATIQUE",
+        title: "les enjeux de genre dans la",
+        // subtitle: "THEMATIQUE",
         text: "VIE ASSOCIATIVE",
         textprogres: "VIE ASSOCIATIVE",
         description:
@@ -32,8 +30,8 @@ const slides = ref([
     {
         id: 1,
         video: video2,
-        title: "Les Genres dans la",
-        subtitle: "THEMATIQUE",
+        title: "les enjeux de genre dans la",
+        // subtitle: "THEMATIQUE",
         text: "MOBILITES",
         textprogres: "MOBILITES",
         description:
@@ -52,10 +50,10 @@ const slides = ref([
     {
         id: 2,
         video: video3,
-        title: "Les Genres dans la",
-        subtitle: "THEMATIQUE",
-        text: "TOILLETES",
-        textprogres: "TOILLETES",
+        title: "les enjeux de genre dans l’accès aux",
+        // subtitle: "THEMATIQUE",
+        text: "TOILETTES",
+        textprogres: "TOILETTES",
         description:
             "À l’Université de Fianarantsoa, une analyse des pratiques genrées révèle des disparités marquées entre étudiant·es, personnel administratif et enseignant·es, tant en termes d’accessibilité aux infrastructures sanitaires que de conditions d’usage.",
         buttons: [
@@ -69,7 +67,6 @@ const slides = ref([
             },
         ],
     },
-    // Ajouter d'autres slides ici
 ]);
 
 const currentSlide = ref(0);
@@ -77,12 +74,10 @@ const progressBars = ref([0, 0, 0]);
 const videoElements = ref([]);
 const openModal = ref(false);
 const modalVideo = ref("");
-
 const isHovered = ref(false);
+const isPlaying = ref(true);
+const router = useRouter();
 
-const router = useRouter(); // Créer une instance du router
-
-// Méthode pour rediriger vers la bonne page
 const navigateToPage = (index) => {
     switch (index) {
         case 0:
@@ -93,9 +88,6 @@ const navigateToPage = (index) => {
             break;
         case 2:
             router.push("/toillete");
-            break;
-
-        default:
             break;
     }
 };
@@ -121,7 +113,6 @@ const resetProgressBar = () => {
 const nextSlide = () => {
     resetProgressBar();
     resetVideo(currentSlide.value);
-    // Réinitialiser l'animation des éléments de slide
     resetSlideContentAnimation();
     currentSlide.value = (currentSlide.value + 1) % slides.value.length;
 };
@@ -129,25 +120,31 @@ const nextSlide = () => {
 const prevSlide = () => {
     resetProgressBar();
     resetVideo(currentSlide.value);
-    // Réinitialiser l'animation des éléments de slide
     resetSlideContentAnimation();
     currentSlide.value =
         (currentSlide.value - 1 + slides.value.length) % slides.value.length;
 };
 
-// Fonction pour réinitialiser l'animation des éléments du slide
 const resetSlideContentAnimation = () => {
-    const slideContentElements = document.querySelectorAll(
-        ".animate-slide-content"
-    );
-    slideContentElements.forEach((el) => {
-        // Retirer la classe pour réinitialiser l'animation
-        el.classList.remove("animate-slide-content");
-        // Forcer le reflow pour redémarrer l'animation
-        void el.offsetWidth; // Cette ligne force un reflow du DOM
-        // Réajouter la classe pour lancer l'animation
-        el.classList.add("animate-slide-content");
+    const elements = document.querySelectorAll(".animate-slide-content");
+    elements.forEach((el) => {
+        el.classList.remove("appear");
+        void el.offsetWidth;
+        el.classList.add("appear");
     });
+};
+
+const togglePlayPause = () => {
+    const video = videoElements.value[currentSlide.value];
+    if (video) {
+        if (video.paused) {
+            video.play();
+            isPlaying.value = true;
+        } else {
+            video.pause();
+            isPlaying.value = false;
+        }
+    }
 };
 
 const handleVideoEnd = () => {
@@ -157,9 +154,7 @@ const handleVideoEnd = () => {
 watch(currentSlide, () => {
     nextTick(() => {
         const video = videoElements.value[currentSlide.value];
-        if (video) {
-            video.play();
-        }
+        if (video) video.play();
     });
 });
 
@@ -173,6 +168,19 @@ const closeModal = () => {
 };
 
 onMounted(() => {
+    let startX = 0;
+    const carousel = document.querySelector(".carousel-wrapper");
+    if (carousel) {
+        carousel.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+        carousel.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diffX = endX - startX;
+            if (diffX > 50) prevSlide();
+            else if (diffX < -50) nextSlide();
+        });
+    }
     nextTick(() => {
         videoElements.value = document.querySelectorAll("video");
         videoElements.value.forEach((video) => {
@@ -184,11 +192,10 @@ onMounted(() => {
 
 <template>
     <div
-        class="relative w-full h-[639px] overflow-hidden"
+        class="relative w-full h-[639px] overflow-hidden carousel-wrapper"
         @mouseenter="isHovered = true"
         @mouseleave="isHovered = false"
     >
-        <!-- Carrousel -->
         <div
             class="relative flex transition-transform duration-500 ease-in-out w-full h-full"
             :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
@@ -198,19 +205,20 @@ onMounted(() => {
                 :key="slide.id"
                 class="w-full h-full flex-shrink-0 relative"
             >
-                <!-- Vidéo en arrière-plan -->
                 <video
                     ref="videoElements"
                     :src="slide.video"
-                    class="absolute inset-0 w-full h-[695px] object-cover"
+                    class="absolute inset-0 w-full h-[695px] object-cover z-0"
                     autoplay
                     muted
                     @ended="handleVideoEnd"
                 ></video>
-
-                <!-- Contenu -->
                 <div
-                    class="absolute top-[20%] w-[1140px] max-w-[80%] left-1/2 -translate-x-1/2 pr-[30%] box-border text-white drop-shadow-[0_5px_10px_#0007]"
+                    class="absolute inset-0 bg-black/60 z-10 pointer-events-none"
+                ></div>
+
+                <div
+                    class="absolute content-block top-[30%] w-[1140px] max-w-[80%] left-1/2 -translate-x-1/2 pr-[30%] box-border text-white drop-shadow-[0_5px_10px_#0007] z-20"
                 >
                     <div
                         class="author font-poppins font-bold tracking-[10px] animate-slide-content"
@@ -233,7 +241,6 @@ onMounted(() => {
                     <div
                         class="grid [grid-template-columns:repeat(2,190px)] [grid-template-rows:40px] gap-[5px] mt-[20px] animate-slide-content"
                     >
-                        <!-- Boutons -->
                         <button
                             v-for="(button, buttonIndex) in slide.buttons"
                             :key="buttonIndex"
@@ -252,19 +259,17 @@ onMounted(() => {
             </div>
         </div>
 
-        <!-- Transition des boutons de navigation -->
         <Transition name="fade">
             <button
                 v-if="isHovered"
                 @click="prevSlide"
-                class="absolute group p-2 flex justify-center items-center border border-secondary w-12 h-12 transition-all duration-500 rounded-full top-2/4 -translate-y-8 left-5 hover:bg-secondary"
+                class="absolute group p-2 flex justify-center items-center border border-secondary w-16 h-16 transition-all duration-500 rounded-full top-2/4 -translate-y-8 left-5 hover:bg-secondary"
             >
-                <!-- Icône flèche gauche SVG -->
                 <svg
-                    class="h-5 w-5 text-white group-hover:text-white"
+                    class="h-12 w-12 text-white group-hover:text-white"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="50"
+                    height="50"
                     viewBox="0 0 16 16"
                     fill="none"
                 >
@@ -283,14 +288,13 @@ onMounted(() => {
             <button
                 v-if="isHovered"
                 @click="nextSlide"
-                class="absolute group p-2 flex justify-center items-center border border-secondary w-12 h-12 transition-all duration-500 rounded-full top-2/4 -translate-y-8 right-5 hover:bg-secondary"
+                class="absolute group p-2 flex justify-center items-center border border-secondary w-16 h-16 transition-all duration-500 rounded-full top-2/4 -translate-y-8 right-5 hover:bg-secondary"
             >
-                <!-- Icône flèche droite SVG -->
                 <svg
-                    class="h-5 w-5 text-white group-hover:text-white"
+                    class="h-12 w-12 text-white group-hover:text-white"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="50"
+                    height="50"
                     viewBox="0 0 16 16"
                     fill="none"
                 >
@@ -305,6 +309,17 @@ onMounted(() => {
             </button>
         </Transition>
 
+        <!-- Bouton play/pause -->
+        <Transition name="fade">
+            <button
+                v-if="isHovered"
+                @click="togglePlayPause"
+                class="absolute bottom-20 right-5 bg-black/50 text-white p-2 rounded-full z-30"
+            >
+                {{ isPlaying ? "Pause" : "Play" }}
+            </button>
+        </Transition>
+
         <!-- Barres de progression -->
         <div class="absolute bottom-1 left-0 right-0 flex justify-center gap-2">
             <div
@@ -312,14 +327,12 @@ onMounted(() => {
                 :key="slide.id"
                 class="w-1/3 flex flex-col items-center"
             >
-                <!-- Barre de progression -->
                 <div class="h-1 bg-gray-700 rounded overflow-hidden w-full">
                     <div
                         class="h-1 bg-green-400 rounded transition-all duration-500"
                         :style="{ width: `${progressBars[index]}%` }"
                     ></div>
                 </div>
-                <!-- Titre sous la barre de progression -->
                 <div
                     class="text-white text-xs tracking-[5px] font-poppins font-bold mt-2 text-center drop-shadow-[0_1px_5px_#0007]"
                 >
@@ -328,24 +341,19 @@ onMounted(() => {
             </div>
         </div>
 
-        <!-- Modal -->
         <Teleport to="body">
             <div
                 v-if="openModal"
                 class="modal fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
             >
-                <!-- Bouton de fermeture positionné au-dessus de la vidéo -->
-
                 <button
                     @click="closeModal"
-                    class="z-50 close-btn absolute top-4 right-4 w-10 h-10 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-300 dark:focus:bg-neutral-600"
+                    class="z-50 absolute top-4 right-4 w-12 h-12 flex items-center justify-center rounded-full bg-secondary hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
                 >
-                    <span class="sr-only">Close</span>
+                    <span class="sr-only">Fermer la vidéo</span>
                     <svg
-                        class="shrink-0 size-4"
+                        class="block h-8 w-8 text-white"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -354,11 +362,10 @@ onMounted(() => {
                         stroke-linejoin="round"
                     >
                         <path d="M18 6 6 18"></path>
-                        <path d="m6 6 12 12"></path>
+                        <path d="M6 6l12 12"></path>
                     </svg>
                 </button>
 
-                <!-- Vidéo dans la modal -->
                 <video
                     :src="modalVideo"
                     class="video-modal w-full h-full object-cover"
@@ -370,7 +377,7 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
+<style scoped>
 /* Transition d'entrée et de sortie des boutons */
 .fade-enter-active,
 .fade-leave-active {
@@ -396,10 +403,11 @@ onMounted(() => {
 }
 
 .video-modal {
-    object-fit: cover; /* Garde le ratio de la vidéo et la couvre entièrement */
+    object-fit: cover;
     width: 100%;
     height: 100%;
 }
+
 /* Animation d'entrée pour chaque élément du slide */
 @keyframes showContent {
     to {
@@ -429,5 +437,47 @@ onMounted(() => {
 }
 .grid {
     animation-delay: 1.8s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .title,
+    .topic {
+        font-size: 3em;
+    }
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .content-block {
+        top: 15% !important;
+        padding-right: 15% !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .title,
+    .topic {
+        font-size: 2em;
+        text-align: center;
+    }
+    .author,
+    .des,
+    .grid {
+        text-align: center;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .content-block {
+        top: 10% !important;
+        padding: 0 1rem !important;
+    }
+    .w-12.h-12 {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    .video-modal {
+        height: auto;
+    }
 }
 </style>

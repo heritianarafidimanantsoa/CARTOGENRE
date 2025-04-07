@@ -1,101 +1,212 @@
 <template>
-    <div class="relative h-[639px]">
-        <div
-            class="title font-poppins font-bold text-[3em] leading-[1.3em] animate-slide-content text-center absolute top-5 left-1/2 transform -translate-x-1/2"
-        >
-            EXPRIMEZ-VOUS
-        </div>
-
-        <div class="flex justify-center items-center h-full bg-gray-100">
+    <div class="relative h-auto py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
             <div
-                class="flex flex-row w-2/3 bg-white shadow-lg rounded-lg overflow-hidden"
+                class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-xl overflow-hidden"
             >
+                <!-- Carte -->
                 <div
-                    class="basis-1/2 bg-primary flex flex-col items-center justify-center text-white font-bold text-lg"
+                    class="lg:w-1/2 w-full bg-primary flex items-center justify-center"
                 >
-                    <MapComponent />
+                    <Cartexpression v-model="position" />
                 </div>
+
+                <!-- Formulaire -->
                 <div
-                    class="basis-1/2 bg-secondary p-6 flex justify-center items-center"
+                    class="lg:w-1/2 w-full bg-secondary px-8 py-10 flex items-center"
                 >
-                    <form class="max-w-sm w-full space-y-4">
+                    <form
+                        @submit.prevent="handleSubmit"
+                        class="w-full max-w-lg mx-auto space-y-6"
+                    >
+                        <!-- Titre intégré -->
+                        <div class="text-center">
+                            <h2
+                                class="text-3xl font-bold text-primary mb-4 font-poppins"
+                            >
+                                EXPRIMEZ-VOUS
+                            </h2>
+                            <p class="text-white text-sm">
+                                Partagez votre expérience de façon anonyme et
+                                sécurisée
+                            </p>
+                        </div>
+
+                        <!-- Genre -->
                         <div>
                             <label
-                                for="feedbackType"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="genre"
+                                class="block mb-1 text-sm font-medium text-white"
+                                >Vous êtes :</label
                             >
-                                Que s'est-il passé ?
-                            </label>
                             <select
-                                id="feedbackType"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                                id="genre"
+                                name="genre"
+                                class="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
                             >
-                                <option value="avis">Avis</option>
-                                <option value="suggestion">Suggestion</option>
-                                <option value="france">Experience</option>
+                                <option disabled selected value="">
+                                    Choisissez une option
+                                </option>
+                                <option value="homme">Homme</option>
+                                <option value="femme">Femme</option>
                             </select>
                         </div>
 
+                        <!-- Type de retour -->
                         <div>
                             <label
                                 for="feedbackType"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                class="block mb-1 text-sm font-medium text-white"
+                                >Que s'est-il passé ?</label
                             >
-                                Où ça se passe ?
-                            </label>
-                            <input
+                            <select
                                 id="feedbackType"
+                                name="feedbackType"
+                                class="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
+                            >
+                                <option value="">Choisissez un type</option>
+                                <option value="avis">Avis</option>
+                                <option value="suggestion">Suggestion</option>
+                                <option value="experience">Expérience</option>
+                            </select>
+                        </div>
+
+                        <!-- Lieu -->
+                        <div>
+                            <label
+                                for="lieu"
+                                class="block mb-1 text-sm font-medium text-white"
+                                >Où cela s'est-il passé ?</label
+                            >
+                            <input
                                 type="text"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                placeholder="indiquez le lieu"
+                                id="lieu"
+                                name="lieu"
+                                placeholder="Indiquez le lieu"
+                                class="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
                             />
                         </div>
 
-                        <div
-                            class="max-w-lg mx-auto bg-white shadow-md rounded-lg p-3"
-                        >
-                            <!-- Zone de texte sans bordure et non redimensionnable -->
+                        <!-- Message et actions -->
+                        <div class="bg-white shadow rounded-lg p-4">
+                            <label
+                                for="message"
+                                class="block text-sm font-medium text-gray-700 mb-2"
+                                >Votre message :</label
+                            >
                             <textarea
-                                placeholder="A vous le clavier..."
-                                class="w-full h-20 rounded-lg focus:outline-none focus:ring-0 text-gray-900 resize-none"
+                                id="message"
+                                name="message"
+                                rows="4"
+                                placeholder="À vous le clavier..."
+                                class="w-full p-3 text-gray-800 rounded-lg border border-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-primary"
                             ></textarea>
 
-                            <!-- Section des boutons (upload et enregistrement) -->
                             <div
-                                class="flex items-center justify-between mt-3 px-3 py-2"
+                                class="flex items-center justify-start gap-6 mt-4"
                             >
-                                <div class="flex space-x-4">
-                                    <!-- Bouton Upload Image -->
-                                    <label
-                                        for="file-upload"
-                                        class="cursor-pointer"
-                                    >
-                                        <i
-                                            class="fas fa-image text-green-500 text-2xl"
-                                        ></i>
-                                    </label>
-                                    <input
-                                        id="file-upload"
-                                        type="file"
-                                        class="hidden"
-                                    />
+                                <!-- Upload image -->
+                                <label
+                                    for="file-upload"
+                                    class="cursor-pointer flex items-center gap-2 text-sm text-gray-600 hover:text-green-600"
+                                >
+                                    <i
+                                        class="fas fa-image text-green-500 text-xl"
+                                    ></i>
+                                    <span class="hidden sm:inline">Image</span>
+                                </label>
+                                <input
+                                    id="file-upload"
+                                    type="file"
+                                    class="hidden"
+                                    @change="handleImageUpload"
+                                />
 
-                                    <!-- Bouton Enregistrement -->
-                                    <button>
-                                        <i
-                                            class="fas fa-microphone text-red-500 text-2xl"
-                                        ></i>
-                                    </button>
-                                </div>
+                                <!-- Microphone -->
+                                <button
+                                    type="button"
+                                    @click="
+                                        isRecording
+                                            ? stopRecording()
+                                            : startRecording()
+                                    "
+                                    class="flex items-center gap-2 text-sm text-gray-600 hover:text-red-600"
+                                >
+                                    <i
+                                        :class="[
+                                            'text-xl',
+                                            isRecording
+                                                ? 'fas fa-stop text-red-700 animate-pulse'
+                                                : 'fas fa-microphone text-red-500',
+                                        ]"
+                                    ></i>
+                                    <span class="hidden sm:inline">{{
+                                        isRecording ? "Stop" : "Audio"
+                                    }}</span>
+                                </button>
+
+                                <!-- Affichage durée -->
+                                <span
+                                    v-if="isRecording"
+                                    class="text-sm text-red-600 font-semibold"
+                                >
+                                    {{ formattedDuration }}
+                                </span>
+                            </div>
+
+                            <!-- Aperçu image sélectionnée -->
+                            <div
+                                v-if="imagePreview"
+                                class="mt-4 relative inline-block"
+                            >
+                                <img
+                                    :src="imagePreview"
+                                    class="w-20 h-20 object-cover rounded-xl shadow border"
+                                />
+                                <button
+                                    @click="removeImage"
+                                    class="absolute -top-2 -right-2 bg-white border border-gray-300 text-gray-600 rounded-full p-1 shadow hover:bg-red-500 hover:text-white"
+                                >
+                                    <i class="fas fa-times text-xs"></i>
+                                </button>
+                            </div>
+
+                            <!-- Aperçu de l'audio enregistré -->
+                            <div
+                                v-if="audioBlob"
+                                class="mt-4 flex items-center gap-3"
+                            >
+                                <audio
+                                    :src="audioUrl"
+                                    controls
+                                    class="w-full rounded-lg shadow"
+                                ></audio>
+                                <button
+                                    @click="clearAudio"
+                                    type="button"
+                                    class="text-red-600 hover:text-red-800"
+                                    title="Supprimer l'audio"
+                                >
+                                    <i class="fas fa-times-circle text-xl"></i>
+                                </button>
                             </div>
                         </div>
 
-                        <RouterLink
-                            to="/forumPage"
-                            class="block text-center mt-4 px-6 py-3 bg-primary text-secondary font-semibold rounded-lg shadow-md hover:bg-primary/80 transition"
+                        <!-- Message de confirmation -->
+                        <div
+                            v-if="successMessage"
+                            class="text-green-500 text-sm text-center"
+                        >
+                            {{ successMessage }}
+                        </div>
+
+                        <!-- Bouton envoyer -->
+                        <button
+                            type="submit"
+                            class="w-full inline-block text-center px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/80 transition duration-200"
                         >
                             ENVOYER
-                        </RouterLink>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -104,7 +215,131 @@
 </template>
 
 <script setup>
-import MapComponent from "@/components/maps.vue";
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import Cartexpression from "@/components/cartexpression.vue";
+
+const router = useRouter();
+const position = ref({ lat: null, lng: null });
+const successMessage = ref("");
+const imageFile = ref(null);
+const imagePreview = ref(null);
+
+const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        imageFile.value = file;
+        imagePreview.value = URL.createObjectURL(file);
+    }
+};
+
+const removeImage = () => {
+    imageFile.value = null;
+    imagePreview.value = null;
+};
+
+const isRecording = ref(false);
+let mediaRecorder;
+let chunks = [];
+const audioBlob = ref(null);
+const audioUrl = ref(null);
+const duration = ref(0);
+let timer = null;
+
+const startRecording = async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+        });
+        mediaRecorder = new MediaRecorder(stream);
+        chunks = [];
+        duration.value = 0;
+
+        mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+        mediaRecorder.onstop = () => {
+            audioBlob.value = new Blob(chunks, { type: "audio/webm" });
+            audioUrl.value = URL.createObjectURL(audioBlob.value);
+            clearInterval(timer);
+        };
+
+        mediaRecorder.start();
+        isRecording.value = true;
+        timer = setInterval(() => duration.value++, 1000);
+    } catch (err) {
+        alert("Microphone inaccessible !");
+        console.error(err);
+    }
+};
+
+const stopRecording = () => {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+        mediaRecorder.stop();
+        isRecording.value = false;
+    }
+};
+
+const formattedDuration = computed(() => {
+    const min = Math.floor(duration.value / 60)
+        .toString()
+        .padStart(1, "0");
+    const sec = (duration.value % 60).toString().padStart(2, "0");
+    return `${min}:${sec}`;
+});
+
+const clearAudio = () => {
+    audioBlob.value = null;
+    audioUrl.value = null;
+    duration.value = 0;
+};
+
+const handleSubmit = async () => {
+    const genre = document.getElementById("genre").value;
+    const feedbackType = document.getElementById("feedbackType").value;
+    const lieu = document.getElementById("lieu").value;
+    const message = document.getElementById("message").value;
+
+    if (!genre || !feedbackType) {
+        alert("Veuillez remplir tous les champs obligatoires.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("genre", genre);
+    formData.append("feedbackType", feedbackType);
+    formData.append("lieu", lieu);
+    formData.append("message", message);
+    formData.append("latitude", position.value.lat);
+    formData.append("longitude", position.value.lng);
+
+    if (imageFile.value) {
+        formData.append("file", imageFile.value);
+    }
+    if (audioBlob.value) {
+        formData.append("audio", audioBlob.value, "audio.webm");
+    }
+
+    try {
+        const response = await fetch("http://localhost/submit.php", {
+            method: "POST",
+            body: formData,
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            successMessage.value = "✅ Données envoyées avec succès !";
+            setTimeout(() => {
+                successMessage.value = "";
+                router.push("/forumPage");
+            }, 2000);
+        } else {
+            alert(`❌ Erreur : ${result.message}`);
+        }
+    } catch (error) {
+        console.error("Erreur réseau :", error);
+        alert("❌ Erreur de connexion au serveur.");
+    }
+};
 </script>
 
 <style scoped>

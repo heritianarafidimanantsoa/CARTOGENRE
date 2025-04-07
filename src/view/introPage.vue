@@ -27,7 +27,8 @@
                 class="text-white text-base sm:text-lg font-light z-10 text-center max-w-xs sm:max-w-sm md:max-w-md"
             >
                 Pour une expérience optimale, connectez vos écouteurs <br />
-                Mettez vos lunettes de genre
+                Explorez ce site pour découvrir les enjeux de genre sur le
+                campus d'Andrainjato.
             </p>
 
             <!-- Bouton pour lancer la vidéo -->

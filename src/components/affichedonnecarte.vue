@@ -85,7 +85,7 @@ onMounted(() => {
     if (window.L) {
         map = L.map("map", {
             center: [-21.463903, 47.10864], // Centrage initial de la carte
-            zoom: 15, // Zoom éloigné par défaut
+            zoom: 10, // Zoom éloigné par défaut
             scrollWheelZoom: false, // Désactiver le zoom au scroll
             dragging: true, // Permettre de déplacer la carte
         });

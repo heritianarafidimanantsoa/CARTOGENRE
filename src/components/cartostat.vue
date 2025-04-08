@@ -57,15 +57,21 @@ onMounted(() => {
         return;
     }
 
-    const map = L.map("map", { scrollWheelZoom: false }).setView(
-        [-21.4633723, 47.1121022],
-        15
+    const map = L.map("map", {
+        scrollWheelZoom: false, // Désactivation du zoom par molette
+        minZoom: 4, // Zoom minimum autorisé
+        maxZoom: 18, // Zoom maximum autorisé
+    }).setView(
+        [-21.4633723, 47.1121022], // Coordonnées pour centrer la carte
+        18 // Zoom plus éloigné
     );
 
+    // Ajouter un tileLayer
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
     }).addTo(map);
 
+    // Ajouter un autre tileLayer si nécessaire
     L.tileLayer("https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
     }).addTo(map);

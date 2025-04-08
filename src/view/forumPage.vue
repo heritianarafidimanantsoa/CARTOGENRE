@@ -1,87 +1,111 @@
 <template>
     <div class="flex flex-row w-full h-[639px] z-0">
         <!-- Section Texte -->
-        <div class="basis-1/2 flex flex-col justify-center px-10">
+        <div class="basis-1/2 flex flex-col justify-center">
+            <!-- Section MAPS -->
+            <div class="h-[639px] w-full z-0">
+                <DonneCarte />
+            </div>
+        </div>
+
+        <!-- Section Slider -->
+        <div class="basis-1/2 relative">
+            <!-- Titre avec superposition -->
             <div
-                class="author font-poppins font-bold tracking-[10px] animate-slide-content"
+                class="author font-poppins font-bold tracking-[10px] animate-slide-content absolute top-[5%] left-1/2 transform -translate-x-1/2 z-10 text-center w-full"
             >
                 FAITES ENTENDRE VOTRE VOIX,
             </div>
             <div
-                class="title font-poppins font-bold text-[4em] leading-[1.3em] animate-slide-content"
+                class="title font-poppins font-bold text-[3rem] sm:text-[3.5rem] md:text-[4rem] leading-[1.3em] animate-slide-content absolute top-[calc(5%+2rem)] left-1/2 transform -translate-x-1/2 z-10 text-center w-full"
             >
                 EXPRIMEZ-VOUS
             </div>
+
+            <!-- Section Carousel -->
             <div
-                class="grid grid-cols-2 gap-5 mt-5 animate-slide-content justify-center items-center"
+                class="contents z-0 relative flex justify-center items-center w-full h-[639px]"
+            >
+                <!-- Carousel container -->
+                <div
+                    class="slider w-full max-w-full sm:max-w-[600px] md:max-w-[700px] h-[80%] relative overflow-hidden mt-20"
+                >
+                    <div
+                        v-for="slide in slides"
+                        :key="slide.id"
+                        class="item relative w-full h-full"
+                    >
+                        <img
+                            src="../assets/icon/quote-mark-svgrepo-com.svg"
+                            class="absolute top-2 right-8 opacity-50 w-15 h-15"
+                        />
+                        <h1 class="opacity-50 text-[13px]">
+                            {{ slide.title || "Date inconnue" }}
+                        </h1>
+                        <p class="pt-10">
+                            {{ slide.text || "Aucun message..." }}
+                        </p>
+                    </div>
+
+                    <!-- Boutons de navigation -->
+                    <button
+                        id="prev"
+                        class="slider-button absolute top-1/2 left-5 transform -translate-y-1/2 z-20 hover:bg-gray-700 transition duration-200"
+                    >
+                        <svg
+                            class="h-16 w-16 text-secondary"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                        >
+                            <path
+                                d="M10.0002 11.9999L6 7.99971L10.0025 3.99719"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        id="next"
+                        class="slider-button absolute top-1/2 right-5 transform -translate-y-1/2 z-20 hover:bg-gray-700 transition duration-200"
+                    >
+                        <svg
+                            class="h-16 w-16 text-secondary"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                        >
+                            <path
+                                d="M5.99984 4.00012L10 8.00029L5.99748 12.0028"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lien S'exprimer -->
+            <div
+                class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 text-center w-[300px] mx-auto sm:w-[350px] md:w-[400px]"
             >
                 <RouterLink
                     to="/formulairePage"
-                    class="border-0 bg-secondary px-6 py-2 tracking-[3px] font-poppins font-medium text-white hover:bg-secondary/90 transition duration-200 flex justify-center items-center"
+                    class="border-0 bg-primary px-6 py-2 tracking-[3px] font-poppins font-medium text-white hover:bg-secondary/90 transition duration-200 w-full flex justify-center items-center"
                     aria-label="Accéder à la page du formulaire"
                 >
                     S'EXPRIMER
                 </RouterLink>
             </div>
         </div>
-
-        <!-- Section Slider -->
-        <div class="basis-1/2 contents">
-            <div class="slider">
-                <div v-for="slide in slides" :key="slide.id" class="item">
-                    <img
-                        src="../assets/icon/quote-mark-svgrepo-com.svg"
-                        class="absolute top-2 right-8 opacity-50 w-15 h-15"
-                    />
-                    <h1 class="opacity-50 text-[13px]">
-                        {{ slide.title || "Date inconnue" }}
-                    </h1>
-                    <p class="pt-10">{{ slide.text || "Aucun message..." }}</p>
-                </div>
-
-                <button id="prev">
-                    <svg
-                        class="h-10 w-10 text-white group-hover:text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                    >
-                        <path
-                            d="M10.0002 11.9999L6 7.99971L10.0025 3.99719"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
-                </button>
-                <button id="next">
-                    <svg
-                        class="h-10 w-10 text-white group-hover:text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                    >
-                        <path
-                            d="M5.99984 4.00012L10 8.00029L5.99748 12.0028"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section MAPS -->
-    <div class="h-[639px] w-full z-0">
-        <DonneCarte />
     </div>
 </template>
 
@@ -164,7 +188,6 @@ onMounted(() => {
 .contents {
     background-image: linear-gradient(to top, #582c4d, #9ad35a);
     margin: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-family: "Poppins", sans-serif;

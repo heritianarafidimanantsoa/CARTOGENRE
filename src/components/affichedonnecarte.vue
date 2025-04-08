@@ -7,17 +7,23 @@
 <script setup>
 import { onMounted, watch } from "vue";
 
+// Définition des propriétés (props) pour les filtres
 const props = defineProps({
     filterType: String,
     filterDate: String,
 });
 
-let map;
+let map; // Déclaration de la variable globale pour la carte
 
+// Fonction pour recentrer la carte
 const centerMap = () => {
-    map.setView([-21.4633723, 47.1121022], 17.4);
+    if (map) {
+        // Centre la carte sans changer le niveau de zoom
+        map.setView([-21.461886, 47.103844]); // Pas de zoom défini ici, on conserve le zoom initial
+    }
 };
 
+// Fonction pour récupérer et afficher les marqueurs
 const fetchAndDisplay = () => {
     let url = new URL("http://localhost/fetch_feedbacks.php");
     const params = new URLSearchParams();
@@ -28,42 +34,45 @@ const fetchAndDisplay = () => {
     fetch(url)
         .then((res) => res.json())
         .then((data) => {
+            // Supprimer tous les marqueurs existants avant d'en ajouter de nouveaux
             map.eachLayer((layer) => {
                 if (layer instanceof L.Marker) {
                     map.removeLayer(layer);
                 }
             });
 
+            // Ajouter de nouveaux marqueurs avec les données récupérées
             data.forEach((entry) => {
                 const marker = L.marker([
                     entry.latitude,
                     entry.longitude,
                 ]).addTo(map);
                 const popup = `
-            <div style="max-width: 250px">
-              <h3 class="font-bold text-lg text-primary mb-1">${
-                  entry.genre
-              } - ${entry.feedbackType}</h3>
-              <p class="mb-1"><strong>Lieu:</strong> ${entry.lieu}</p>
-              <p class="text-sm text-gray-700">${entry.message}</p>
-              ${
-                  entry.image_path
-                      ? `<img src="http://localhost/${entry.image_path}" alt="image" class="w-full h-auto mt-2 rounded" />`
-                      : ""
-              }
-              ${
-                  entry.audio_path
-                      ? `<audio controls class="mt-2 w-full">
-                <source src="http://localhost/${entry.audio_path}" type="audio/webm">
-                Votre navigateur ne prend pas en charge l'audio.
-              </audio>`
-                      : ""
-              }
-            </div>
-          `;
+                    <div style="max-width: 250px">
+                        <h3 class="font-bold text-lg text-primary mb-1">${
+                            entry.genre
+                        } - ${entry.feedbackType}</h3>
+                        <p class="mb-1"><strong>Lieu:</strong> ${entry.lieu}</p>
+                        <p class="text-sm text-gray-700">${entry.message}</p>
+                        ${
+                            entry.image_path
+                                ? `<img src="http://localhost/${entry.image_path}" alt="image" class="w-full h-auto mt-2 rounded" />`
+                                : ""
+                        }
+                        ${
+                            entry.audio_path
+                                ? `<audio controls class="mt-2 w-full">
+                                    <source src="http://localhost/${entry.audio_path}" type="audio/webm">
+                                    Votre navigateur ne prend pas en charge l'audio.
+                                  </audio>`
+                                : ""
+                        }
+                    </div>
+                `;
                 marker.bindPopup(popup);
             });
 
+            // Recentrer la carte après avoir ajouté les marqueurs sans changer le zoom
             centerMap();
         })
         .catch((error) => {
@@ -71,21 +80,36 @@ const fetchAndDisplay = () => {
         });
 };
 
+// Initialisation de la carte après le montage
 onMounted(() => {
-    if (!window.L) {
+    if (window.L) {
+        map = L.map("map", {
+            center: [-21.463903, 47.10864], // Centrage initial de la carte
+            zoom: 15, // Zoom éloigné par défaut
+            scrollWheelZoom: false, // Désactiver le zoom au scroll
+            dragging: true, // Permettre de déplacer la carte
+        });
+
+        // Ajouter un seul tileLayer
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(map);
+
+        L.tileLayer(
+            "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors",
+            }
+        ).addTo(map);
+
+        // Charger et afficher les marqueurs
+        fetchAndDisplay();
+    } else {
         console.error("Leaflet n'est pas chargé");
-        return;
     }
-
-    map = L.map("map").setView([-21.4633723, 47.1121022], 17.4);
-
-    L.tileLayer("https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-    }).addTo(map);
-
-    fetchAndDisplay();
 });
 
+// Réagir aux changements de filtre
 watch(() => [props.filterType, props.filterDate], fetchAndDisplay, {
     immediate: true,
 });

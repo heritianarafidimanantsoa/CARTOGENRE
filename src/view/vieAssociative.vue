@@ -8,11 +8,7 @@
             class="w-full lg:w-1/2 shadow-md rounded-lg overflow-hidden relative"
         >
             <div class="relative w-full h-[300px] lg:h-full">
-                <img
-                    :src="images[currentIndex].src"
-                    class="block transition duration-500"
-                    :alt="images[currentIndex].title"
-                />
+                <CarteThematique :image="images[currentIndex]" />
             </div>
             <!-- Contrôles du carrousel -->
             <button
@@ -149,6 +145,7 @@
 import { ref, watch, onMounted } from "vue";
 import { Chart, registerables } from "chart.js";
 import Footer from "@/components/footer.vue";
+import CarteThematique from "@/components/CarteThematique.vue";
 
 // Images du carrousel
 import videoIntro from "@/assets/img/image1.jpg";

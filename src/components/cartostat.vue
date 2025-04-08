@@ -22,16 +22,36 @@ Chart.register(...registerables);
 
 // Utilisation de `activeTab` pour générer dynamiquement le titre
 const selectedFonction = ref(props.activeTab); // Gérer dynamiquement les types (etudiant, enseignant, pat)
-
+console.log("Selected Fonction:", selectedFonction.value);
 watch(
     () => props.activeTab,
     (newValue) => {
-        selectedFonction.value = newValue; // Mettre à jour `selectedFonction` à chaque changement de `activeTab`
+        selectedFonction.value = newValue; // Met à jour selectedFonction quand activeTab change
+        console.log("Selected Function updated:", selectedFonction.value);
+    },
+    { immediate: true }
+);
+
+// Déclare la fonction updatePopupTitle avant son utilisation
+const updatePopupTitle = (title) => {
+    const popupTitle = document.querySelector(".popup-title");
+    if (popupTitle) {
+        popupTitle.textContent = title;
     }
+};
+
+// Regarder les changements de `currentTabLabel` et mettre à jour le titre dans le popup
+watch(
+    () => props.currentTabLabel,
+    (newValue) => {
+        console.log("currentTabLabel updated:", newValue);
+        // Mettre à jour le titre du popup si la prop change
+        updatePopupTitle(newValue);
+    },
+    { immediate: true }
 );
 
 onMounted(() => {
-    console.log("currentTabLabel:", props.currentTabLabel);
     if (!window.L) {
         console.error("❌ Leaflet non chargé !");
         return;
@@ -41,6 +61,10 @@ onMounted(() => {
         [-21.4633723, 47.1121022],
         15
     );
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
 
     L.tileLayer("https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
@@ -102,7 +126,7 @@ onMounted(() => {
                         const popupContent = `
     <div class="p-4 space-y-3 w-72 flex flex-col max-h-[500px] overflow-y-auto">
         <!-- Titre dynamique h1 -->
-        <h1 class="text-center text-2xl font-bold mb-4">${props.currentTabLabel}</h1>
+        <h1 class="text-center text-2xl font-bold mb-4 popup-title">${props.currentTabLabel}</h1>
 
         <!-- Titre existant h3 avec nom -->
         <h3 id="chartTitle-${uniqueId}" class="text-center text-lg font-semibold mb-2">${name} - ${selectedFonction.value}</h3>
@@ -166,22 +190,62 @@ onMounted(() => {
 
                                     let data, labels;
                                     let label = "";
+
+                                    console.log(
+                                        "Selected Function:",
+                                        selectedFonction.value
+                                    ); // Ajoutez un log pour vérifier la valeur de selectedFonction
+
+                                    // Récupérer les données en fonction de l'onglet actif
                                     if (type === "globale") {
+                                        console.log("Fetching Global Data...");
                                         data = chartData.donneesGlobale?.data;
                                         labels =
                                             chartData.donneesGlobale?.labels;
                                         label = "Données Globales";
                                     } else {
-                                        data =
-                                            chartData[selectedFonction.value]?.[
-                                                type
-                                            ]?.data;
-                                        labels =
-                                            chartData[selectedFonction.value]?.[
-                                                type
-                                            ]?.labels;
-                                        label = type.toUpperCase();
+                                        if (
+                                            selectedFonction.value ===
+                                            "etudiant"
+                                        ) {
+                                            console.log(
+                                                "Fetching Etudiant Data..."
+                                            );
+                                            data =
+                                                chartData.etudiant?.[type]
+                                                    ?.data;
+                                            labels =
+                                                chartData.etudiant?.[type]
+                                                    ?.labels;
+                                            label = type.toUpperCase();
+                                        } else if (
+                                            selectedFonction.value ===
+                                            "enseignant"
+                                        ) {
+                                            console.log(
+                                                "Fetching Enseignant Data..."
+                                            );
+                                            data =
+                                                chartData.enseignant?.[type]
+                                                    ?.data;
+                                            labels =
+                                                chartData.enseignant?.[type]
+                                                    ?.labels;
+                                            label = type.toUpperCase();
+                                        } else if (
+                                            selectedFonction.value === "pat"
+                                        ) {
+                                            console.log("Fetching PAT Data...");
+                                            data = chartData.pat?.[type]?.data;
+                                            labels =
+                                                chartData.pat?.[type]?.labels;
+                                            label = type.toUpperCase();
+                                        }
                                     }
+
+                                    // Log les données et les labels récupérés
+                                    console.log("Data:", data);
+                                    console.log("Labels:", labels);
 
                                     if (!data || !labels) {
                                         console.warn(

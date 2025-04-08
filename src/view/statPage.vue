@@ -3,6 +3,11 @@ import { ref, computed, onMounted, watch, nextTick } from "vue";
 import Chart from "chart.js/auto";
 import cartostat from "@/components/cartostat.vue";
 
+// Déclarer myChart en tant que référence
+const myChart = ref(null); // Utilisez ref pour créer une référence à votre graphique
+
+let chartInstance = null; // Instance pour stocker le graphique
+
 const props = defineProps({
     selectedFonction: {
         type: String,
@@ -10,6 +15,7 @@ const props = defineProps({
     },
 });
 
+// Définir les onglets
 const tabs = ref([
     { id: "etudiant", label: "Étudiant", icon: "fas fa-user-graduate" },
     {
@@ -17,10 +23,11 @@ const tabs = ref([
         label: "Enseignant",
         icon: "fas fa-chalkboard-teacher",
     },
-    { id: "pat", label: "PAT", icon: "fas fa-building" },
+    { id: "pat", label: "Personnel administratif", icon: "fas fa-building" },
 ]);
 
-const activeTab = ref(props.selectedFonction);
+// Onglet actif
+const activeTab = ref(props.selectedFonction || "etudiant");
 
 const getCurrentTab = computed(() => {
     return (
@@ -30,52 +37,135 @@ const getCurrentTab = computed(() => {
     );
 });
 
-const myChart = ref(null);
-let chartInstance = null;
-
+// Configurations des graphiques
 const chartConfigs = {
     etudiant: {
-        labels: ["L1", "L2", "L3", "M1", "M2"],
-        data: [
-            { masculin: 264, feminin: 73 },
-            { masculin: 176, feminin: 44 },
-            { masculin: 247, feminin: 75 },
-            { masculin: 122, feminin: 37 },
-            { masculin: 64, feminin: 19 },
+        labels: [
+            "DEGSS",
+            "FLSH",
+            "ENS",
+            "EMIT",
+            "ENI",
+            "SCIENCE",
+            "ISTE",
+            "MEDECINE",
+            "CONFUCIUS",
+            "ISST",
         ],
-        label: "Répartition des étudiants",
+        data: [
+            { masculin: 4938, feminin: 5291 },
+            { masculin: 2603, feminin: 2158 },
+            { masculin: 2241, feminin: 2395 },
+            { masculin: 1757, feminin: 2032 },
+            { masculin: 1784, feminin: 1315 },
+            { masculin: 903, feminin: 841 },
+            { masculin: 719, feminin: 505 },
+            { masculin: 231, feminin: 171 },
+            { masculin: 130, feminin: 136 },
+            { masculin: 171, feminin: 136 },
+        ],
+        label: "Répartition des étudiants par sexe et établissement",
     },
     enseignant: {
-        labels: ["Femmes", "Hommes"],
-        data: [45, 55],
+        labels: [
+            "DEGSS",
+            "FLSH",
+            "ENS",
+            "EMIT",
+            "ENI",
+            "SCIENCE",
+            "ISTE",
+            "MEDECINE",
+            "CONFUCIUS",
+            "ISST",
+        ],
+        data: [
+            { masculin: 28, feminin: 51 },
+            { masculin: 203, feminin: 218 },
+            { masculin: 221, feminin: 235 },
+            { masculin: 177, feminin: 202 },
+            { masculin: 174, feminin: 135 },
+            { masculin: 93, feminin: 81 },
+            { masculin: 79, feminin: 55 },
+            { masculin: 21, feminin: 11 },
+            { masculin: 30, feminin: 16 },
+            { masculin: 17, feminin: 13 },
+        ],
         label: "Répartition des enseignants",
     },
     pat: {
-        labels: ["Administratif", "Technique"],
-        data: [30, 20],
+        labels: [
+            "DEGSS",
+            "FLSH",
+            "ENS",
+            "EMIT",
+            "ENI",
+            "SCIENCE",
+            "ISTE",
+            "MEDECINE",
+            "CONFUCIUS",
+            "ISST",
+        ],
+        data: [
+            { masculin: 938, feminin: 291 },
+            { masculin: 203, feminin: 258 },
+            { masculin: 241, feminin: 295 },
+            { masculin: 157, feminin: 232 },
+            { masculin: 184, feminin: 115 },
+            { masculin: 93, feminin: 81 },
+            { masculin: 19, feminin: 50 },
+            { masculin: 31, feminin: 71 },
+            { masculin: 30, feminin: 36 },
+            { masculin: 71, feminin: 36 },
+        ],
         label: "Personnel PAT",
     },
 };
 
+// Fonction pour calculer les pourcentages
+const calculatePercentages = () => {
+    const activeData = chartConfigs[activeTab.value].data;
+    return chartConfigs[activeTab.value].labels.map((label, index) => {
+        const masculin = activeData[index].masculin;
+        const feminin = activeData[index].feminin;
+        const total = masculin + feminin;
+        const masculinPercentage = ((masculin / total) * 100).toFixed(2);
+        const femininPercentage = ((feminin / total) * 100).toFixed(2);
+        return { label, masculinPercentage, femininPercentage };
+    });
+};
+
+// Calcul dynamique des pourcentages
+const percentages = computed(() => calculatePercentages());
+
+// Création du graphique
 const createChart = () => {
     nextTick(() => {
-        const ctx = myChart.value?.getContext("2d");
+        const ctx = myChart.value?.getContext("2d"); // Accès à la référence du canvas
         if (!ctx) return;
 
-        if (chartInstance) chartInstance.destroy();
+        if (chartInstance) chartInstance.destroy(); // Détruire l'instance existante si elle existe
 
-        const config = chartConfigs[activeTab.value];
+        const config = chartConfigs[activeTab.value]; // Obtenir la configuration basée sur l'onglet actif
 
+        // Créer une nouvelle instance du graphique
         chartInstance = new Chart(ctx, {
             type: "bar",
             data: {
                 labels: config.labels,
                 datasets: [
                     {
-                        label: config.label,
-                        data: config.data,
-                        backgroundColor: "rgba(75, 192, 192, 0.2)",
-                        borderColor: "rgba(75, 192, 192, 1)",
+                        label: "Féminin",
+                        data: config.data.map((d) => d.feminin), // Transformation des données
+                        backgroundColor: "rgba(255, 99, 132, 0.6)",
+                        borderColor: "rgba(255, 99, 132, 1)",
+                        borderWidth: 1,
+                    },
+                    {
+                        label: "Masculin",
+                        data: config.data.map((d) => d.masculin), // Transformation des données
+                        backgroundColor: "rgba(54, 162, 235, 0.6)",
+                        borderColor: "rgba(54, 162, 235, 1)",
                         borderWidth: 1,
                     },
                 ],
@@ -84,16 +174,21 @@ const createChart = () => {
                 responsive: true,
                 maintainAspectRatio: true,
                 aspectRatio: 2,
-                scales: { y: { beginAtZero: true } },
+                scales: {
+                    y: { beginAtZero: true },
+                    x: { categoryPercentage: 0.5, barPercentage: 0.4 },
+                },
             },
         });
     });
 };
 
+// Recréer le graphique chaque fois que l'onglet change
 watch(activeTab, () => {
     if (myChart.value) createChart();
 });
 
+// Créer le graphique au montage du composant
 onMounted(() => {
     if (myChart.value) createChart();
 });
@@ -101,8 +196,9 @@ onMounted(() => {
 
 <template>
     <div class="flex flex-col h-[639px] relative">
+        <!-- Titre Dynamique -->
         <div
-            class="absolute top-8 left-[32%] z-20 bg-black/30 px-4 py-2 rounded-md text-left transform -translate-x-1/2 backdrop-blur-sm"
+            class="absolute top-8 left-[32%] z-20 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-md text-left transform -translate-x-1/2"
         >
             <h1 class="text-2xl font-bold text-white">
                 Donner par établissement sur
@@ -113,14 +209,14 @@ onMounted(() => {
         <!-- Carte avec props dynamique -->
         <div class="w-full h-[639px] z-0">
             <cartostat
-                :selectedFonction="activeTab"
+                :activeTab="activeTab"
                 :currentTabLabel="getCurrentTab.label"
             />
         </div>
 
         <!-- Panneau graphique -->
         <div
-            class="absolute top-8 right-10 text-white w-full max-w-lg bg-gray-800 rounded-lg h-[539px] flex flex-col z-30 shadow-lg"
+            class="absolute top-5 right-10 text-white w-full max-w-lg bg-gray-800/95 backdrop-blur-sm rounded-lg h-[600px] flex flex-col z-30 shadow-lg"
             ref="chartContainer"
         >
             <!-- Onglets -->
@@ -139,6 +235,8 @@ onMounted(() => {
                         'rounded-none': tab.id === 'enseignant',
                         'rounded-tr-lg': tab.id === 'pat',
                     }"
+                    :aria-selected="activeTab === tab.id ? 'true' : 'false'"
+                    :aria-controls="tab.id"
                 >
                     <i :class="tab.icon" class="text-xl"></i>
                     <span>{{ tab.label }}</span>
@@ -161,22 +259,33 @@ onMounted(() => {
                 </div>
                 <canvas
                     ref="myChart"
-                    class="mt-4 w-full"
+                    class="w-full"
                     style="max-height: 300px"
                 ></canvas>
             </div>
 
             <!-- Établissements -->
-            <div class="mt-auto grid grid-cols-2 gap-4 text-sm p-6">
-                <div>
-                    <p>EMIT</p>
-                    <p>ENS</p>
-                    <p>DEDGS</p>
-                </div>
-                <div>
-                    <p>ENI</p>
-                    <p>MEDECINE</p>
-                    <p>LETTRE</p>
+            <div
+                class="mt-[-30px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 p-4"
+            >
+                <div
+                    v-for="(item, index) in percentages"
+                    :key="index"
+                    class="bg-gray-700 p-2 rounded-lg shadow-md flex flex-col items-center min-h-[80px]"
+                >
+                    <p
+                        class="font-semibold text-white mb-1 text-center text-[12px]"
+                    >
+                        {{ item.label }}:
+                    </p>
+                    <p class="text-gray-300 text-[10px] text-center">
+                        <span class="font-bold text-blue-300">
+                            H :{{ item.masculinPercentage }}% </span
+                        ><br />
+                        <span class="font-bold text-pink-500">
+                            F :{{ item.femininPercentage }}%
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -188,5 +297,13 @@ canvas {
     width: 100% !important;
     height: auto !important;
     max-height: 300px;
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
 }
 </style>

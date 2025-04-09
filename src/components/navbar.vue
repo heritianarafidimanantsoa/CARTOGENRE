@@ -4,7 +4,7 @@
     <nav
         class="top-0 border-solid border-gray-200 w-full border-b py-3 bg-primary z-50"
     >
-        <div class="container mx-auto">
+        <div class="container mx-auto px-0 md:px-0 lg:px-20">
             <div class="w-full flex flex-col lg:flex-row">
                 <div class="flex justify-between lg:flex-row">
                     <RouterLink to="/home" class="flex items-center space-x-2">
@@ -27,7 +27,7 @@
                     >
                         <span class="sr-only">Open main menu</span>
                         <svg
-                            class="w-6 h-6"
+                            class="w-8 h-8"
                             aria-hidden="true"
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -78,7 +78,7 @@
                         <li>
                             <RouterLink
                                 to="/forumPage"
-                                class="relative flex items-center justify-between text-gray-50 text-sm lg:text-base font-poppins font-medium hover:text-secondary transition-all duration-300 group mb-2 lg:mr-6 md:mb-0 md:mr-3"
+                                class="relative flex items-center justify-between text-gray-50 text-sm lg:text-base font-poppins font-medium hover:text-secondary transition-all duration-300 group mb-2 lg:mr-0 md:mb-0 md:mr-3"
                             >
                                 <span>Témoignage</span>
                                 <span

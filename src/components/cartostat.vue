@@ -58,13 +58,12 @@ onMounted(() => {
     }
 
     const map = L.map("map", {
-        scrollWheelZoom: false, // Désactivation du zoom par molette
+        center: [-21.4633723, 47.1121022], // Coordonnées spécifiques pour centrer la carte
+        zoom: 17, // Zoom initial (ajuste cette valeur pour rapprocher ou éloigner)
+        scrollWheelZoom: false, // Désactive le zoom par molette
         minZoom: 4, // Zoom minimum autorisé
         maxZoom: 18, // Zoom maximum autorisé
-    }).setView(
-        [-21.4633723, 47.1121022], // Coordonnées pour centrer la carte
-        18 // Zoom plus éloigné
-    );
+    });
 
     // Ajouter un tileLayer
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -325,7 +324,7 @@ onMounted(() => {
                 },
             }).addTo(map);
 
-            map.fitBounds(geoJSONLayer.getBounds());
+            // Suppression de fitBounds() pour ne pas ajuster la vue en fonction des données
         })
         .catch((error) => {
             console.error(

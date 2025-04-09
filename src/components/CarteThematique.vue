@@ -7,18 +7,26 @@ import { onMounted } from "vue";
 
 onMounted(() => {
     if (window.L) {
+        // Initialisation de la carte avec centrage sur les coordonnées spécifiques
         const map = L.map("map", {
-            scrollWheelZoom: false,
-        }).setView([-21.4633723, 47.1121022], 15);
+            center: [-21.4633723, 47.1121022], // Coordonnées initiales de la carte
+            zoom: 15, // Zoom initial (ajuste cette valeur pour rapprocher ou éloigner)
+            scrollWheelZoom: false, // Désactive le zoom par molette
+            minZoom: 4, // Zoom minimum autorisé
+            maxZoom: 18, // Zoom maximum autorisé
+        });
 
+        // Ajouter un fond de carte standard
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: "&copy; OpenStreetMap contributors",
         }).addTo(map);
 
+        // Ajouter un autre fond de carte si nécessaire
         L.tileLayer("@/assets/img/maps.png", {
             attribution: "&copy; OpenStreetMap contributors",
         }).addTo(map);
 
+        // Ajouter une autre source de tuiles
         L.tileLayer(
             "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",
             {
@@ -26,6 +34,7 @@ onMounted(() => {
             }
         ).addTo(map);
 
+        // Charger les données GeoJSON et ajouter les marqueurs à la carte
         fetch("/geojson/mobilit.geojson")
             .then((response) => response.json())
             .then((data) => {
@@ -33,28 +42,26 @@ onMounted(() => {
                     pointToLayer: (feature, latlng) => {
                         const name = feature.properties.name || "Lieu inconnu";
 
-                        // Utilisation d'une icône de localisation prédéfinie par Leaflet
+                        // Icône pour le marqueur
                         const icon = L.icon({
                             iconUrl:
-                                "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png", // Icône de localisation
+                                "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png", // Icône standard
                             iconSize: [25, 41], // Taille de l'icône
-                            iconAnchor: [12, 41], // Ancrage de l'icône (position du marqueur)
+                            iconAnchor: [12, 41], // Ancrage de l'icône
                             popupAnchor: [0, -41], // Position de la popup par rapport au marqueur
                         });
 
-                        const marker = L.marker(latlng, { icon: icon }).addTo(
-                            map
-                        );
+                        const marker = L.marker(latlng, { icon }).addTo(map);
 
                         // Crée un divIcon pour afficher le nom au-dessus du marqueur
                         const label = L.divIcon({
                             className: "marker-label",
                             html: `<div class="text-center">${name}</div>`,
-                            iconSize: [100, 30], // Largeur et hauteur de l'étiquette
-                            iconAnchor: [50, 0], // Ancrage de l'étiquette pour qu'elle soit centrée au-dessus du marqueur
+                            iconSize: [100, 30], // Taille de l'étiquette
+                            iconAnchor: [50, 0], // Position de l'étiquette
                         });
 
-                        // Crée un marker pour le nom, positionné au-dessus du marqueur
+                        // Marqueur pour le nom, au-dessus du marqueur
                         L.marker(latlng, { icon: label }).addTo(map);
 
                         return marker; // Retourne le marqueur avec l'icône
@@ -93,7 +100,7 @@ onMounted(() => {
                     },
                 }).addTo(map);
 
-                map.fitBounds(geoJSONLayer.getBounds());
+                // Ne pas utiliser fitBounds() ici pour centrer la carte sur les coordonnées initiales
             })
             .catch((error) => {
                 console.error("Erreur de chargement du fichier GeoJSON", error);

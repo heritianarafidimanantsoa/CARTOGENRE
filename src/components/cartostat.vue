@@ -66,9 +66,12 @@ onMounted(() => {
     });
 
     // Ajouter un tileLayer
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-    }).addTo(map);
+    L.tileLayer(
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png",
+        {
+            attribution: "&copy; OpenStreetMap contributors",
+        }
+    ).addTo(map);
 
     // Ajouter un autre tileLayer si nécessaire
     L.tileLayer("https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png", {

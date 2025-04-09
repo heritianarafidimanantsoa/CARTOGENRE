@@ -26,9 +26,11 @@
         v-if="!isPlaying"
         class="text-white text-base sm:text-lg font-light z-10 text-center max-w-xs sm:max-w-sm md:max-w-md"
       >
-        Pour une expérience optimale, connectez vos écouteurs <br />
-        Explorez ce site pour découvrir les enjeux de genre sur le campus
-        d'Andrainjato
+        À travers la cartographie, nous mettons en lumière les inégalités de
+        genre qui structurent les pratiques sur le campus universitaire
+        d'Andrainjato Fianarantsoa, Madagascar. Accédez à une vidéo
+        d'introduction qui vous explique en détail cette démarche et vous guide
+        dans l'exploration de la carte interactive.
       </p>
 
       <!-- Bouton pour lancer la vidéo -->

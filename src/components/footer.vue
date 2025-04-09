@@ -101,11 +101,12 @@
                         CartoGenre
                     </span>
                     — Réalisé par
-                    <span
-                        class="font-medium text-white hover:text-white/90 transition"
-                    >
-                        RAF.Heritiana · RAF.Ranto · MEC.Daddy · RAD.Fifaliana
-                    </span>
+                    <span class="font-medium text-white hover:text-white/90 transition">
+                    <a href="https://www.linkedin.com/in/heritiana-rafidimanantsoa/" target="_blank" class="hover:underline">RAF.Heritiana</a> · 
+                    <a href="https://www.linkedin.com/in/ranto-fidinarivo/" target="_blank" class="hover:underline">FID.Ranto</a> · 
+                    <a href="https://www.linkedin.com/in/daddy-barjeenio-mec-892196234/" target="_blank" class="hover:underline">MEC.Daddy</a> · 
+                    <a href="https://www.linkedin.com/in/fifaliana-randrianjaka-8ab85423b/" target="_blank" class="hover:underline">RAN.Fifaliana</a>
+</span>
                 </p>
             </div>
         </div>

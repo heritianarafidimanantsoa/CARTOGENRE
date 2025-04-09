@@ -7,7 +7,12 @@
         <div class="container mx-auto">
             <div class="w-full flex flex-col lg:flex-row">
                 <div class="flex justify-between lg:flex-row">
-                    <RouterLink to="/home" class="flex items-center">
+                    <RouterLink to="/home" class="flex items-center space-x-2">
+                        <img
+                        src="../assets/img/ICOCG.png"
+                        alt="Logo Cartogenre"
+                        class="w-8 h-8 md:w-10 md:h-10"
+                        />
                         <span
                             class="text-2xl font-poppins font-semibold text-gray-50"
                             >CARTOGENRE</span

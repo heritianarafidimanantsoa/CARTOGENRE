@@ -1,4 +1,49 @@
 <template>
+<<<<<<< HEAD
+  <div class="relative w-full h-screen flex bg-black">
+    <!-- Vidéo -->
+    <video
+      ref="videoElement"
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      @ended="handleVideoEnd"
+      :autoplay="false"
+    >
+      <source src="@/assets/img/videoIntro.mp4" type="video/mp4" />
+    </video>
+
+    <div
+      class="h-screen flex flex-col justify-center items-center space-y-6 w-full px-4"
+    >
+      <!-- Image -->
+      <img
+        v-if="!isPlaying"
+        src="@/assets/img/logo-Madatlas.png"
+        alt="Image"
+        class="w-40 sm:w-48 md:w-56 h-auto z-10"
+      />
+
+      <!-- Texte -->
+      <p
+        v-if="!isPlaying"
+        class="text-white text-base sm:text-lg font-light z-10 text-center max-w-xs sm:max-w-sm md:max-w-md"
+      >
+        À travers la cartographie, nous mettons en lumière les inégalités de
+        genre qui structurent les pratiques sur le campus universitaire
+        d'Andrainjato Fianarantsoa, Madagascar. Accédez à une vidéo
+        d'introduction qui vous explique en détail cette démarche et vous guide
+        dans l'exploration de la carte interactive.
+      </p>
+
+      <!-- Bouton pour lancer la vidéo -->
+      <button
+        v-if="!isPlaying"
+        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
+        @click="playVideo"
+      >
+        <!-- Texte du bouton -->
+        <span
+          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent flex items-center space-x-2"
+=======
     <div class="relative w-full h-screen flex bg-black">
         <!-- Vidéo principale -->
         <video
@@ -10,6 +55,7 @@
             muted
             @play="isPlaying = true"
             @pause="isPlaying = false"
+>>>>>>> f5aac1e1ec934858db659dc265b57ff8bac4e6bd
         >
             <source src="@/assets/img/videoIntro.mp4" type="video/mp4" />
         </video>

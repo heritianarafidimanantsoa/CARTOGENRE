@@ -5,19 +5,19 @@ import Footer from "@/components/footer.vue";
 const services = [
   {
     icon: "fas fa-venus-mars",
-    title: "INÉGALITÉ DE GENRE",
+    title: "COMPRENDRE LES INÉGALITÉS",
     description:
       "Explorer les inégalités systémiques pour identifier des pistes d'action concrètes.",
   },
   {
     icon: "fas fa-universal-access",
-    title: "INCLUSION",
+    title: "DEVELOPPER L'INCLUSION",
     description:
       "Favoriser l'accessibilité et la représentation équitable dans les espaces universitaires.",
   },
   {
     icon: "fas fa-balance-scale",
-    title: "ÉQUITÉ",
+    title: "FAVORISER L'ÉQUITÉ",
     description:
       "Garantir des opportunités justes pour chaque individu au sein de la communauté académique.",
   },
@@ -115,7 +115,11 @@ const services = [
         >
           La culture malgache assigne des rôles distincts à l’homme et à la
           femme. Ces distinctions façonnent les attentes et les inégalités dans
-          la société contemporaine.
+          la société contemporaine. « Il n’existe aucune loi qui établisse une
+          différence entre les sexes au sein de l’université de Fianarantsoa:
+          hommes et femmes sont traités de manière égale. Ce sont les pratiques
+          sociales des étudiants qui révèlent les inégalités. » Pr Clarisse
+          RASOAMAMPIONONA
         </p>
 
         <!-- On isole le bouton avec du padding top -->

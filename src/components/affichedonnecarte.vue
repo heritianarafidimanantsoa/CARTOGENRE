@@ -84,16 +84,19 @@ const fetchAndDisplay = () => {
 onMounted(() => {
     if (window.L) {
         map = L.map("map", {
-            center: [-21.463903, 47.10864], // Centrage initial de la carte
+            center: [-21.463573, 47.107728], // Centrage initial de la carte
             zoom: 15, // Zoom éloigné par défaut
             scrollWheelZoom: false, // Désactiver le zoom au scroll
             dragging: true, // Permettre de déplacer la carte
         });
 
         // Ajouter un seul tileLayer
-        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: "&copy; OpenStreetMap contributors",
-        }).addTo(map);
+        L.tileLayer(
+            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors",
+            }
+        ).addTo(map);
 
         L.tileLayer(
             "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",

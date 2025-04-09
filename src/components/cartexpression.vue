@@ -225,6 +225,12 @@ onMounted(() => {
     if (window.L) {
         map = L.map("map").setView([latitude.value, longitude.value], 16.5);
         L.tileLayer(
+            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors",
+            }
+        ).addTo(map);
+        L.tileLayer(
             "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",
             {
                 attribution: "&copy; OpenStreetMap contributors",

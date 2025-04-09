@@ -18,7 +18,7 @@ onMounted(() => {
 
         // Ajouter un fond de carte standard
         L.tileLayer(
-            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png",
+            "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
             {
                 attribution: "&copy; OpenStreetMap contributors",
             }
@@ -31,7 +31,7 @@ onMounted(() => {
 
         // Ajouter une autre source de tuiles
         L.tileLayer(
-            "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",
+            "https://warper.wmflabs.org/maps/tile/8560/{z}/{x}/{y}.png",
             {
                 attribution: "&copy; OpenStreetMap contributors",
             }

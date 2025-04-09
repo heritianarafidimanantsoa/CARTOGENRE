@@ -26,7 +26,7 @@ const services = [
 
 <template>
   <!-- HERO avec background image -->
-  <section class="relative w-full h-[639px]">
+  <section class="relative w-full h-[639px] ">
     <video
       autoplay
       muted
@@ -71,11 +71,11 @@ const services = [
 
   <!-- SUJET DE GENRE -->
   <section
-    class="h-[639px] bg-white flex items-center justify-center text-center px-4"
+    class="h-[639px] bg-white flex items-center justify-center text-center px-4 mb-10 mt-8"
   >
     <div class="w-full flex flex-col items-center relative">
       <!-- Avatars en demi-arc avec hauteur définie -->
-      <div class="relative w-full h-[440px] mb-0">
+      <div class="relative w-full h-[400px] sm:h-[440px] md:h-[500px] lg:h-[540px] xl:h-[580px] mb-0">
         <!-- Gauche bas -->
         <img
           src="@/assets/img/avatar1.svg"
@@ -107,7 +107,7 @@ const services = [
       <div
         class="absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20 px-4 max-w-xl"
       >
-        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-8">
           Réveler les inégalités de genre sur le campus
         </h1>
         <p
@@ -138,7 +138,7 @@ const services = [
   <!-- POINTS D'INTÉRÊT -->
   <section
     id="Service"
-    class="h-[639px] bg-gray-50 flex flex-col justify-center"
+    class="h-[639px] bg-gray-50 flex flex-col justify-center px-4 mb-0"
   >
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">

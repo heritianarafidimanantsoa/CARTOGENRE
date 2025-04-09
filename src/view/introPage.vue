@@ -87,6 +87,11 @@
             <div
                 class="absolute inset-0 flex flex-col items-center justify-center space-y-6 z-10 w-full h-full max-w-[1200px] mx-auto"
             >
+
+            <img
+                src="../assets/img/LOGO CARTOGENRE.png"
+                alt="Logo Cartogenre"
+                class="w-24 h-auto mb-2"/>
                 <!-- Titre -->
                 <h1
                     class="font-poppins font-bold text-[2.5em] md:text-[5em] leading-tight text-primary mb-4"

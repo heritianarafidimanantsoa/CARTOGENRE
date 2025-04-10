@@ -25,7 +25,9 @@ const centerMap = () => {
 
 // Fonction pour récupérer et afficher les marqueurs
 const fetchAndDisplay = () => {
-    let url = new URL("https://www.cartogenre-uf.mastercmw.com/fetch_feedbacks.php");
+    let url = new URL(
+        "https://www.cartogenre-uf.mastercmw.com/fetch_feedbacks.php"
+    );
     const params = new URLSearchParams();
     if (props.filterType) params.append("type", props.filterType);
     if (props.filterDate) params.append("date", props.filterDate);

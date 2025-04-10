@@ -321,10 +321,13 @@ const handleSubmit = async () => {
     }
 
     try {
-        const response = await fetch("https://www.cartogenre-uf.mastercmw.com/submit.php", {
-            method: "POST",
-            body: formData,
-        });
+        const response = await fetch(
+            "https://www.cartogenre-uf.mastercmw.com/submit.php",
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
 
         const result = await response.json();
 

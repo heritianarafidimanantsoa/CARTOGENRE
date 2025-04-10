@@ -18,7 +18,7 @@ onMounted(() => {
 
         // Ajouter un fond de carte standard
         L.tileLayer(
-            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png?key=299bdb45-18aa-4131-98d0-26cd796b8d09",
+            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png?key=1c0478a5-ef9a-4a8b-8f23-6c70284d985d",
             {
                 attribution: "&copy; OpenStreetMap contributors",
             }

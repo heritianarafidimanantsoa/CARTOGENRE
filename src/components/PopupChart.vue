@@ -28,14 +28,14 @@ const createChart = () => {
         datasets: [
             {
                 label: "Féminin",
-                backgroundColor: "rgba(255, 105, 180, 0.8)",
-                borderColor: "rgba(255, 105, 180, 0.4)",
+                backgroundColor: "#FFFF00",
+                borderColor: "#DAA520",
                 data: props.dataFemme,
             },
             {
                 label: "Masculin",
-                backgroundColor: "rgba(0, 0, 255, 0.8)",
-                borderColor: "rgba(0, 0, 255, 0.4)",
+                backgroundColor: "#9ad35a",
+                borderColor: "rgba(154, 211, 100, 0.6)",
                 data: props.dataHomme,
             },
         ],

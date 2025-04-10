@@ -319,7 +319,7 @@ const handleSubmit = async () => {
     }
 
     try {
-        const response = await fetch("http://localhost/submit.php", {
+        const response = await fetch("http://cartogenre-uf.mastercmw.com/submit.php", {
             method: "POST",
             body: formData,
         });

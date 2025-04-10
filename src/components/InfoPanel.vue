@@ -6,7 +6,7 @@
         <div class="flex-grow p-8 flex flex-col">
             <div class="text-appear mb-2">
                 <div
-                    class="inline-block px-4 py-1 bg-blue-500/10 backdrop-blur-sm rounded-full text-blue-400 text-xs tracking-wider font-medium mb-2"
+                    class="inline-block px-4 py-1 bg-blue-500/10 backdrop-blur-sm rounded-full text-lime-400 text-xs tracking-wider font-medium mb-2"
                 >
                     {{ activeTab === "map" ? "CARTOGRAPHIE" : "STATISTIQUES" }}
                 </div>

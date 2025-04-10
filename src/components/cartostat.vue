@@ -274,7 +274,7 @@ onMounted(() => {
                                                     data: data.map(
                                                         (d) => d.masculin
                                                     ),
-                                                    backgroundColor: "#3b82f6",
+                                                    backgroundColor: "#FFFF00",
                                                     borderRadius: 6,
                                                 },
                                                 {
@@ -282,7 +282,7 @@ onMounted(() => {
                                                     data: data.map(
                                                         (d) => d.feminin
                                                     ),
-                                                    backgroundColor: "#ec4899",
+                                                    backgroundColor: "#9ad35a",
                                                     borderRadius: 6,
                                                 },
                                             ],

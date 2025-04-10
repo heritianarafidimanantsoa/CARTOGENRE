@@ -157,15 +157,15 @@ const createChart = () => {
           {
             label: "Féminin",
             data: config.data.map((d) => d.feminin), // Transformation des données
-            backgroundColor: "rgba(255, 99, 132, 0.6)",
-            borderColor: "rgba(255, 99, 132, 1)",
+            backgroundColor: "#FFFF00",
+            borderColor: "#DAA520",
             borderWidth: 1,
           },
           {
             label: "Masculin",
             data: config.data.map((d) => d.masculin), // Transformation des données
-            backgroundColor: "rgba(54, 162, 235, 0.6)",
-            borderColor: "rgba(54, 162, 235, 1)",
+            backgroundColor: "#9ad35a",
+            borderColor: "rgba(154, 211, 100, 0.6)",
             borderWidth: 1,
           },
         ],
@@ -269,10 +269,10 @@ onMounted(() => {
             {{ item.label }}:
           </p>
           <p class="text-gray-300 text-[10px] text-center">
-            <span class="font-bold text-blue-300">
+            <span class="font-bold text-lime-400">
               H :{{ item.masculinPercentage }}% </span
             ><br />
-            <span class="font-bold text-pink-500">
+            <span class="font-bold text-yellow-400">
               F :{{ item.femininPercentage }}%
             </span>
           </p>

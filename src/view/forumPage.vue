@@ -117,7 +117,7 @@ const slides = ref([]);
 
 const fetchFeedbacks = async () => {
     try {
-        const response = await fetch("http://cartogenre-uf.mastercmw.com/fetch_feedbacks.php");
+        const response = await fetch("https://www.cartogenre-uf.mastercmw.com/fetch_feedbacks.php");
         const data = await response.json();
         slides.value = data.map((item, index) => ({
             id: item.id || index + 1,

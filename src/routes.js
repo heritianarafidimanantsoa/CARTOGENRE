@@ -3,6 +3,7 @@ import statPage from "@/view/statPage.vue";
 import chantierPage from "@/view/chantierPage.vue";
 import homePage from "@/view/homePage.vue";
 import introPage from "@/view/introPage.vue";
+import about from "@/view/about.vue";
 
 export const routes = [
     {
@@ -13,6 +14,11 @@ export const routes = [
     {
         path: "/home",
         component: homePage,
+        meta: { showNavbar: true }, // Afficher la navbar sur cette page
+    },
+    {
+        path: "/About",
+        component: about,
         meta: { showNavbar: true }, // Afficher la navbar sur cette page
     },
     {

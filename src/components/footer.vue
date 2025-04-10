@@ -95,11 +95,13 @@
             <div class="text-center">
                 <p class="text-sm text-white/80">
                     &copy; 2025
-                    <span
-                        class="font-semibold text-white hover:text-white/90 transition"
+                    <RouterLink
+                    to="/homePage"
+                    class="font-semibold text-white hover:text-white/90 transition"
                     >
-                        CartoGenre
-                    </span>
+                    CartoGenre
+                    </RouterLink>
+
                     — Réalisé par
                     <span class="font-medium text-white hover:text-white/90 transition">
                     <a href="https://www.linkedin.com/in/heritiana-rafidimanantsoa/" target="_blank" class="hover:underline">RAF.Heritiana</a> · 

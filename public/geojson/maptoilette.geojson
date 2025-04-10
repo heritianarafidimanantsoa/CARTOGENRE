@@ -1,0 +1,257 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.108973,
+          -21.464307
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette auditorium",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "IxMDQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.111349,
+          -21.464467
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette DEGS",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "UxNTA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.106956,
+          -21.463438
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette E-atiala",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "E0NTE"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.10739,
+          -21.462869
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette E-atiala",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "AxMTQ"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.110276,
+          -21.463328
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette EMIT",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "AxNDM"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.109198,
+          -21.463209
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette ENS",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "A5MzU"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.104837,
+          -21.462774
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette KSLMD",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "A3ODA"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.109772,
+          -21.463313
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette Médecine",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Yellow"
+        }
+      },
+      "id": "IzNzc"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.104611,
+          -21.461791
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette Préfat",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "M1NjY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.108206,
+          -21.46215
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette Présidence",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "U3MTE"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.112325,
+          -21.464297
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette R+3",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "k3NDg"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.10621,
+          -21.464002
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette sans nom",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "cwNTI"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.109482,
+          -21.464242
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette sans nom",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "gxODY"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          47.107744,
+          -21.463553
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "name": "Toilette CA2E",
+        "_umap_options": {
+          "iconClass": "Drop",
+          "color": "Lime"
+        }
+      },
+      "id": "k2MDg"
+    }
+  ]
+}

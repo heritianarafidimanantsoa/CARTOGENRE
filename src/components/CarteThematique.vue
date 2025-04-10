@@ -38,7 +38,7 @@ onMounted(() => {
         ).addTo(map);
 
         // Charger les données GeoJSON et ajouter les marqueurs à la carte
-        fetch("/geojson/mobilit.geojson")
+        fetch("/geojson/maptoilette.geojson")
             .then((response) => response.json())
             .then((data) => {
                 const geoJSONLayer = L.geoJSON(data, {

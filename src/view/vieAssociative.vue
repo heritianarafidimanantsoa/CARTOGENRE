@@ -205,15 +205,6 @@ Dans ce contexte, même si les décisions peuvent être prises collectivement, l
             data: [43, 12],
         },
     },
-    {
-        src: resultImage3,
-        title: "DÉVELOPPEMENTS FUTURS",
-        description: "Statistiques 3 sur les futurs développements.",
-        chartData: {
-            labels: ["Scénario 1", "Scénario 2", "Scénario 3"],
-            data: [20, 50, 30],
-        },
-    },
 ]);
 
 // Index des slides
@@ -262,7 +253,7 @@ const renderChart = () => {
                 {
                     label: current.title,
                     data: current.chartData.data,
-                    backgroundColor: ["#60a5fa", "#f87171", "#fbbf24"],
+                    backgroundColor: ["#9ad35a", "#FFFF00", "#fbbf24"],
                     borderColor: "#000",
                     borderWidth: 1,
                 },

@@ -14,7 +14,7 @@
         "name": "Toilette auditorium",
         "_umap_options": {
           "iconClass": "Drop",
-          "color": "Lime"
+          "color": "#FFFF00"
         }
       },
       "id": "IxMDQ"

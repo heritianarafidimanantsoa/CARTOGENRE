@@ -252,7 +252,7 @@ const renderChart = () => {
         {
           label: current.title,
           data: current.chartData.data,
-          backgroundColor: ["#9ad35a", "#FFFF00", "#fbbf24"],
+          backgroundColor: ["#9ad35a", "#FFFF00", "#FFFF00"],
           borderColor: "#000",
           borderWidth: 1,
         },

@@ -74,7 +74,7 @@ onMounted(() => {
     ).addTo(map);
 
     // Ajouter un autre tileLayer si nécessaire
-    L.tileLayer("https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png", {
+    L.tileLayer("https://warper.wmflabs.org/maps/tile/8560/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
     }).addTo(map);
 

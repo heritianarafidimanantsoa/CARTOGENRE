@@ -99,7 +99,7 @@ onMounted(() => {
         ).addTo(map);
 
         L.tileLayer(
-            "https://warper.wmflabs.org/maps/tile/8475/{z}/{x}/{y}.png",
+            "https://warper.wmflabs.org/maps/tile/8560/{z}/{x}/{y}.png",
             {
                 attribution: "&copy; OpenStreetMap contributors",
             }

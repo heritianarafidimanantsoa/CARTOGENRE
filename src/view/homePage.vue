@@ -43,7 +43,7 @@ const services = [
                             loop
                         >
                             <source
-                                src="https://www.cartogenre-uf.mastercmw.com/videos/videoIntro.mp4"
+                                src="http://www.cartogenre-uf.mastercmw.com/videos/videoIntro.mp4"
                                 type="video/mp4"
                             />
 
@@ -61,7 +61,7 @@ const services = [
                             loop
                         >
                             <source
-                                src="https://www.cartogenre-uf.mastercmw.com/videos/video_2.mp4"
+                                src="http://www.cartogenre-uf.mastercmw.com/videos/video_2.mp4"
                                 type="video/mp4"
                             />
 
@@ -79,7 +79,7 @@ const services = [
                             loop
                         >
                             <source
-                                src="https://www.cartogenre-uf.mastercmw.com/videos/video_3.mp4"
+                                src="https://cartogenre-uf.mastercmw.com/videos/video_3.mp4"
                                 type="video/mp4"
                             />
 
@@ -97,7 +97,7 @@ const services = [
                             loop
                         >
                             <source
-                                src="https://www.cartogenre-uf.mastercmw.com/videos/video_1.mp4"
+                                src="https://cartogenre-uf.mastercmw.com/videos/video_1.mp4"
                                 type="video/mp4"
                             />
 

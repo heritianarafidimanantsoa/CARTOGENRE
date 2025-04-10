@@ -78,14 +78,13 @@
                             <label
                                 for="lieu"
                                 class="block mb-1 text-sm font-medium text-white"
-                                >Où cela s'est-il passé ? (ou indique le lieu
-                                sur la carte)</label
+                                >Sélectionnez le lieu sur la carte et indiquez son nom ici</label
                             >
                             <input
                                 type="text"
                                 id="lieu"
                                 name="lieu"
-                                placeholder="Indiquez le lieu"
+                                placeholder="Nom du lieu"
                                 class="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
                             />
                         </div>

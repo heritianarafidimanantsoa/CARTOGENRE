@@ -25,7 +25,7 @@ const centerMap = () => {
 
 // Fonction pour récupérer et afficher les marqueurs
 const fetchAndDisplay = () => {
-    let url = new URL("http://localhost/fetch_feedbacks.php");
+    let url = new URL("https://www.cartogenre-uf.mastercmw.com/fetch_feedbacks.php");
     const params = new URLSearchParams();
     if (props.filterType) params.append("type", props.filterType);
     if (props.filterDate) params.append("date", props.filterDate);
@@ -56,13 +56,13 @@ const fetchAndDisplay = () => {
                         <p class="text-sm text-gray-700">${entry.message}</p>
                         ${
                             entry.image_path
-                                ? `<img src="http://localhost/${entry.image_path}" alt="image" class="w-full h-auto mt-2 rounded" />`
+                                ? `<img src="https://www.cartogenre-uf.mastercmw.com/${entry.image_path}" alt="image" class="w-full h-auto mt-2 rounded" />`
                                 : ""
                         }
                         ${
                             entry.audio_path
                                 ? `<audio controls class="mt-2 w-full">
-                                    <source src="http://localhost/${entry.audio_path}" type="audio/webm">
+                                    <source src="https://www.cartogenre-uf.mastercmw.com/${entry.audio_path}" type="audio/webm">
                                     Votre navigateur ne prend pas en charge l'audio.
                                   </audio>`
                                 : ""

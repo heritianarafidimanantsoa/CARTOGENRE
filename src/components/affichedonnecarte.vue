@@ -19,7 +19,7 @@ let map; // Déclaration de la variable globale pour la carte
 const centerMap = () => {
     if (map) {
         // Centre la carte sans changer le niveau de zoom
-        map.setView([-21.461886, 47.103844]); // Pas de zoom défini ici, on conserve le zoom initial
+        map.setView([-21.4633723, 47.1090000]); // Pas de zoom défini ici, on conserve le zoom initial
     }
 };
 
@@ -86,15 +86,15 @@ const fetchAndDisplay = () => {
 onMounted(() => {
     if (window.L) {
         map = L.map("map", {
-            center: [-21.463573, 47.107728], // Centrage initial de la carte
-            zoom: 15, // Zoom éloigné par défaut
+            center: [-21.4633723, 47.1190000], // Centrage initial de la carte
+            zoom: 16.4, // Zoom éloigné par défaut
             scrollWheelZoom: false, // Désactiver le zoom au scroll
             dragging: true, // Permettre de déplacer la carte
         });
 
         // Ajouter un seul tileLayer
         L.tileLayer(
-            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png",
+            "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png?key=3a1c3ba9-1285-47fa-a3a7-a311abe4d5b1",
             {
                 attribution: "&copy; OpenStreetMap contributors",
             }

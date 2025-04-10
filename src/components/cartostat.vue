@@ -58,7 +58,7 @@ onMounted(() => {
     }
 
     const map = L.map("map", {
-        center: [-21.4633723, 47.1121022], // Coordonnées spécifiques pour centrer la carte
+        center: [-21.4633723, 47.1111022], // Coordonnées spécifiques pour centrer la carte
         zoom: 17, // Zoom initial (ajuste cette valeur pour rapprocher ou éloigner)
         scrollWheelZoom: false, // Désactive le zoom par molette
         minZoom: 4, // Zoom minimum autorisé
@@ -67,7 +67,7 @@ onMounted(() => {
 
     // Ajouter un tileLayer
     L.tileLayer(
-        "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png",
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png?key=3a1c3ba9-1285-47fa-a3a7-a311abe4d5b1",
         {
             attribution: "&copy; OpenStreetMap contributors",
         }

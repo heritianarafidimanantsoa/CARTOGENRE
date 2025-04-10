@@ -27,6 +27,91 @@ import Footer from "@/components/footer.vue";
     </div>
   </section>
 
+  <!-- SECTION EQUIPE -->
+<section class="bg-gray-100 py-12 px-6 md:px-16">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">L’équipe étudiante</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <!-- Étudiant 1 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img
+          src="/src/assets/img/heritiana.jpg"
+          alt="Heritiana"
+          class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+        />
+        <h3 class="text-gray-800 font-semibold text-lg">RAF. Heritiana</h3>
+        <p class="text-gray-600 text-sm">Design & UI/UX & Intégration</p>
+        <p class="text-gray-600 text-sm mt-1">+33 6 86 78 63 19</p>
+        <a
+          href="https://www.linkedin.com/in/heritiana-rafidimanantsoa/"
+          target="_blank"
+          class="text-blue-600 hover:underline text-sm mt-1 block"
+        >
+          Voir LinkedIn
+        </a>
+      </div>
+
+      <!-- Étudiant 2 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img
+          src="/src/assets/img/ranto.jpg"
+          alt="Ranto"
+          class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+        />
+        <h3 class="text-gray-800 font-semibold text-lg">FID. Ranto</h3>
+        <p class="text-gray-600 text-sm">Coordination & Contenu</p>
+        <p class="text-gray-600 text-sm mt-1">+33 6 86 76 81 13</p>
+        <a
+          href="https://www.linkedin.com/in/ranto-fidinarivo/"
+          target="_blank"
+          class="text-blue-600 hover:underline text-sm mt-1 block"
+        >
+          Voir LinkedIn
+        </a>
+      </div>
+
+      <!-- Étudiant 3 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img
+          src="/src/assets/img/daddy.jpg"
+          alt="Daddy"
+          class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+        />
+        <h3 class="text-gray-800 font-semibold text-lg">MEC. Daddy</h3>
+        <p class="text-gray-600 text-sm">Modélisation & Développement Web</p>
+        <p class="text-gray-600 text-sm mt-1">+33 6 88 28 29 77</p>
+        <a
+          href="https://www.linkedin.com/in/daddy-barjeenio-mec-892196234/"
+          target="_blank"
+          class="text-blue-600 hover:underline text-sm mt-1 block"
+        >
+          Voir LinkedIn
+        </a>
+      </div>
+
+      <!-- Étudiant 4 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img
+          src="/src/assets/img/fifaliana.jpg"
+          alt="Fifaliana"
+          class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+        />
+        <h3 class="text-gray-800 font-semibold text-lg">RAN. Fifaliana</h3>
+        <p class="text-gray-600 text-sm">Contenu & Recherche</p>
+        <p class="text-gray-600 text-sm mt-1">+33 7 71 53 27 57</p>
+        <a
+          href="https://www.linkedin.com/in/fifaliana-randrianjaka-8ab85423b/"
+          target="_blank"
+          class="text-blue-600 hover:underline text-sm mt-1 block"
+        >
+          Voir LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   <!-- FOOTER -->
   <Footer />
 </template>

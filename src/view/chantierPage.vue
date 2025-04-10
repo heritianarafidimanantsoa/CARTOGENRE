@@ -2,9 +2,9 @@
 import { ref, onMounted, watch, nextTick } from "vue";
 import { useRouter } from "vue-router";
 
-// import videoIntro from "@/assets/img/slide1.mp4";
-// import video2 from "@/assets/img/videoIntro.mp4";
-// import video3 from "@/assets/img/slide3.mp4";
+const videoIntro = "https://www.cartogenre-uf.mastercmw.com/videos/slide1.mp4";
+const video2 = "https://www.cartogenre-uf.mastercmw.com/videos/videoIntro.mp4";
+const video3 = "https://www.cartogenre-uf.mastercmw.com/videos/slide3.mp4";
 
 const slides = ref([
     {

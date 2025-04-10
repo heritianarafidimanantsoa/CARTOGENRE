@@ -10,16 +10,17 @@
 
         <!-- Section Slider -->
         <div class="basis-1/2 relative">
-            <!-- Titre avec superposition -->
             <div
-                class="author font-poppins font-bold tracking-[10px] animate-slide-content absolute top-[5%] left-1/2 transform -translate-x-1/2 z-10 text-center w-full"
+                class="absolute top-6 sm:top-10 left-1/2 -translate-x-1/2 z-10 w-full text-center"
             >
-                FAITES ENTENDRE VOTRE VOIX,
-            </div>
-            <div
-                class="title font-poppins font-bold text-[3rem] sm:text-[3.5rem] md:text-[4rem] leading-[1.3em] animate-slide-content absolute top-[calc(5%+2rem)] left-1/2 transform -translate-x-1/2 z-10 text-center w-full"
-            >
-                EXPRIMEZ-VOUS
+                <h1
+                    class="font-poppins text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-wide drop-shadow-md"
+                >
+                    VOTRE TÉMOIGNAGE
+                </h1>
+                <div
+                    class="mt-2 mx-auto w-36 h-1 bg-secondary rounded-full animate-pulse"
+                ></div>
             </div>
 
             <!-- Section Carousel -->
@@ -117,7 +118,7 @@ const slides = ref([]);
 
 const fetchFeedbacks = async () => {
     try {
-        const response = await fetch("https://www.cartogenre-uf.mastercmw.com/fetch_feedbacks.php");
+        const response = await fetch("http://localhost/fetch_feedbacks.php");
         const data = await response.json();
         slides.value = data.map((item, index) => ({
             id: item.id || index + 1,

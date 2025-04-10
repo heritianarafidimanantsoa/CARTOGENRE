@@ -42,7 +42,11 @@ const services = [
                             muted
                             loop
                         >
-                            <source src="" type="video/mp4" />
+                            <source
+                                src="https://www.cartogenre-uf.mastercmw.com/videos/videoIntro.mp4"
+                                type="video/mp4"
+                            />
+
                             Votre navigateur ne supporte pas la lecture de
                             vidéos.
                         </video>
@@ -56,7 +60,11 @@ const services = [
                             muted
                             loop
                         >
-                            <source src="" type="video/mp4" />
+                            <source
+                                src="https://www.cartogenre-uf.mastercmw.com/videos/video_2.mp4"
+                                type="video/mp4"
+                            />
+
                             Votre navigateur ne supporte pas la lecture de
                             vidéos.
                         </video>
@@ -70,7 +78,11 @@ const services = [
                             muted
                             loop
                         >
-                            <source src="" type="video/mp4" />
+                            <source
+                                src="https://www.cartogenre-uf.mastercmw.com/videos/video_3.mp4"
+                                type="video/mp4"
+                            />
+
                             Votre navigateur ne supporte pas la lecture de
                             vidéos.
                         </video>
@@ -84,7 +96,11 @@ const services = [
                             muted
                             loop
                         >
-                            <source src="" type="video/mp4" />
+                            <source
+                                src="https://www.cartogenre-uf.mastercmw.com/videos/video_1.mp4"
+                                type="video/mp4"
+                            />
+
                             Votre navigateur ne supporte pas la lecture de
                             vidéos.
                         </video>

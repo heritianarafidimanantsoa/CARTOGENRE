@@ -108,11 +108,13 @@
             </div>
         </div>
     </div>
+    <Footer class="mt-16" />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import DonneCarte from "@/components/affichedonnecarte.vue";
+import Footer from "@/components/footer.vue";
 
 const slides = ref([]);
 

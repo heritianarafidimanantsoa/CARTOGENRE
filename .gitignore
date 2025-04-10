@@ -19,3 +19,6 @@ coverage
 
 *.tsbuildinfo
 *.mp4
+*.mp4
+
+.git/lfs/

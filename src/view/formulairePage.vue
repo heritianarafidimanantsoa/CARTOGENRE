@@ -64,7 +64,9 @@
                                 name="feedbackType"
                                 class="w-full p-3 rounded-lg bg-white border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
                             >
-                                <option value="">Choisissez un type</option>
+                                <option value="">
+                                    Choisissez un type de témoignage
+                                </option>
                                 <option value="avis">Avis</option>
                                 <option value="suggestion">Suggestion</option>
                                 <option value="experience">Expérience</option>
@@ -76,7 +78,8 @@
                             <label
                                 for="lieu"
                                 class="block mb-1 text-sm font-medium text-white"
-                                >Où cela s'est-il passé ?</label
+                                >Où cela s'est-il passé ? (ou indique le lieu
+                                sur la carte)</label
                             >
                             <input
                                 type="text"

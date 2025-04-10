@@ -1,97 +1,120 @@
-<script setup></script>
+<script setup>
+import { useRoute } from "vue-router";
+const route = useRoute();
+const isHomePage = route.path === "/";
+</script>
 
 <template>
     <nav
-        class="top-0 border-solid border-gray-200 w-full border-b py-3 bg-primary z-50"
+        :class="[
+            'top-0 w-full z-50 py-6 px-6 lg:px-20 transition-all duration-500 flex items-center justify-between',
+            isHomePage
+                ? 'absolute bg-transparent'
+                : 'relative bg-primary border-b border-gray-200',
+        ]"
     >
-        <div class="container mx-auto px-0 md:px-0 lg:px-20">
-            <div class="w-full flex flex-col lg:flex-row">
-                <div class="flex justify-between lg:flex-row">
-                    <RouterLink to="/home" class="flex items-center space-x-2">
-                        <img
-                        src="../assets/img/ICOCG.png"
-                        alt="Logo Cartogenre"
-                        class="w-8 h-8 md:w-10 md:h-10"
-                        />
-                        <span
-                            class="text-2xl font-poppins font-semibold text-gray-50"
-                            >CARTOGENRE</span
-                        >
-                    </RouterLink>
-                    <button
-                        data-collapse-toggle="navbar-default-example"
-                        type="button"
-                        class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                        aria-controls="navbar-default-example"
-                        aria-expanded="false"
-                    >
-                        <span class="sr-only">Open main menu</span>
-                        <svg
-                            class="w-8 h-8"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
-                <div
-                    class="hidden w-full lg:flex lg:pl-11"
-                    id="navbar-default-example"
+        <!-- LOGO -->
+        <RouterLink to="/" class="flex items-center space-x-2">
+            <img
+                src="../assets/img/ICOCG.png"
+                alt="Logo Cartogenre"
+                class="w-8 h-8 md:w-10 md:h-10"
+            />
+            <span
+                :class="[
+                    'text-2xl font-poppins font-semibold tracking-widest',
+                    isHomePage ? 'text-white' : 'text-gray-50',
+                ]"
+            >
+                CARTOGENRE
+            </span>
+        </RouterLink>
+
+        <!-- MENU -->
+        <ul class="hidden lg:flex space-x-10 font-poppins text-sm font-medium">
+            <li>
+                <RouterLink
+                    to="/chantierPage"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-6 md:mb-0 md:mr-3 transition-all duration-300"
+                    :class="
+                        isHomePage
+                            ? 'text-white hover:text-primary'
+                            : 'text-gray-50 hover:text-secondary'
+                    "
                 >
-                    <ul
-                        class="flex items-center flex-col mt-4 lg:mt-0 lg:ml-auto lg:flex-row gap-4"
-                    >
-                        <li>
-                            <RouterLink
-                                to="/chantierPage"
-                                class="relative flex items-center justify-between text-gray-50 text-sm lg:text-base font-poppins font-medium hover:text-secondary transition-all duration-300 group mb-2 lg:mr-6 md:mb-0 md:mr-3"
-                            >
-                                <span> Le genre en pratiques</span>
-                                <span
-                                    class="absolute -bottom-1 left-1/2 w-0 transition-all duration-300 h-0.5 bg-secondary group-hover:w-1/2"
-                                ></span>
-                                <span
-                                    class="absolute -bottom-1 right-1/2 w-0 transition-all duration-300 h-0.5 bg-secondary group-hover:w-1/2"
-                                ></span>
-                            </RouterLink>
-                        </li>
-                        <li>
-                            <RouterLink
-                                to="/statPage"
-                                class="relative flex items-center justify-between text-gray-50 text-sm lg:text-base font-poppins font-medium hover:text-secondary transition-all duration-300 group mb-2 lg:mr-6 md:mb-0 md:mr-3"
-                            >
-                                <span>Statistiques</span>
-                                <span
-                                    class="absolute -bottom-1 left-1/2 w-0 transition-all duration-300 h-0.5 bg-secondary group-hover:w-1/2"
-                                ></span>
-                                <span
-                                    class="absolute -bottom-1 right-1/2 w-0 transition-all duration-300 h-0.5 bg-secondary group-hover:w-1/2"
-                                ></span>
-                            </RouterLink>
-                        </li>
-                        <li>
-                            <RouterLink
-                                to="/forumPage"
-                                class="relative flex items-center justify-between text-gray-50 text-sm lg:text-base font-poppins font-medium hover:text-secondary transition-all duration-300 group mb-2 lg:mr-0 md:mb-0 md:mr-3"
-                            >
-                                <span>Témoignage</span>
-                                <span
-                                    class="absolute -bottom-1 left-1/2 w-0 transition-all duration-300 h-0.5 bg-secondary group-hover:w-1/2"
-                                ></span>
-                                <span
-                                    class="absolute -bottom-1 right-1/2 w-0 transition-all duration-300 h-0.5 bg-secondary group-hover:w-1/2"
-                                ></span>
-                            </RouterLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                    <span>Le genre en pratiques</span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 right-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                </RouterLink>
+            </li>
+
+            <li>
+                <RouterLink
+                    to="/statPage"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-6 md:mb-0 md:mr-3 transition-all duration-300"
+                    :class="
+                        isHomePage
+                            ? 'text-white hover:text-primary'
+                            : 'text-gray-50 hover:text-secondary'
+                    "
+                >
+                    <span>Statistiques</span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 right-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                </RouterLink>
+            </li>
+
+            <li>
+                <RouterLink
+                    to="/forumPage"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-0 md:mb-0 md:mr-3 transition-all duration-300"
+                    :class="
+                        isHomePage
+                            ? 'text-white hover:text-primary'
+                            : 'text-gray-50 hover:text-secondary'
+                    "
+                >
+                    <span>Témoignage</span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 right-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                </RouterLink>
+            </li>
+        </ul>
     </nav>
 </template>

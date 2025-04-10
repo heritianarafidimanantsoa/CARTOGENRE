@@ -2,18 +2,23 @@ import forumPage from "@/view/forumPage.vue";
 import statPage from "@/view/statPage.vue";
 import chantierPage from "@/view/chantierPage.vue";
 import homePage from "@/view/homePage.vue";
-import introPage from "@/view/introPage.vue";
 import about from "@/view/about.vue";
+// import introPage from "@/view/introPage.vue";
 
 export const routes = [
+    // {
+    //     path: "/",
+    //     component: introPage,
+    //     meta: { showNavbar: false }, // Cacher la navbar sur cette page
+    // },
     {
         path: "/",
-        component: introPage,
-        meta: { showNavbar: false }, // Cacher la navbar sur cette page
+        component: homePage,
+        meta: { showNavbar: false },
     },
     {
-        path: "/home",
-        component: homePage,
+        path: "/About",
+        component: about,
         meta: { showNavbar: true }, // Afficher la navbar sur cette page
     },
     {

@@ -95,20 +95,17 @@
             <div class="text-center">
                 <p class="text-sm text-white/80">
                     &copy; 2025
-                    <RouterLink
-                    to="/homePage"
-                    class="font-semibold text-white hover:text-white/90 transition"
+                    <span
+                        class="font-semibold text-white hover:text-white/90 transition"
                     >
-                    CartoGenre
-                    </RouterLink>
-
+                        CartoGenre
+                    </span>
                     — Réalisé par
-                    <span class="font-medium text-white hover:text-white/90 transition">
-                    <a href="https://www.linkedin.com/in/heritiana-rafidimanantsoa/" target="_blank" class="hover:underline">RAF.Heritiana</a> · 
-                    <a href="https://www.linkedin.com/in/ranto-fidinarivo/" target="_blank" class="hover:underline">FID.Ranto</a> · 
-                    <a href="https://www.linkedin.com/in/daddy-barjeenio-mec-892196234/" target="_blank" class="hover:underline">MEC.Daddy</a> · 
-                    <a href="https://www.linkedin.com/in/fifaliana-randrianjaka-8ab85423b/" target="_blank" class="hover:underline">RAN.Fifaliana</a>
-</span>
+                    <span
+                        class="font-medium text-white hover:text-white/90 transition"
+                    >
+                        RAF.Heritiana · RAF.Ranto · MEC.Daddy · RAD.Fifaliana
+                    </span>
                 </p>
             </div>
         </div>

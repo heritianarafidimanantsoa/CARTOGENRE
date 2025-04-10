@@ -2,9 +2,9 @@
 import { ref, onMounted, watch, nextTick } from "vue";
 import { useRouter } from "vue-router";
 
-import videoIntro from "@/assets/img/slide1.mp4";
-import video2 from "@/assets/img/videoIntro.mp4";
-import video3 from "@/assets/img/slide3.mp4";
+// import videoIntro from "@/assets/img/slide1.mp4";
+// import video2 from "@/assets/img/videoIntro.mp4";
+// import video3 from "@/assets/img/slide3.mp4";
 
 const slides = ref([
     {
@@ -12,8 +12,8 @@ const slides = ref([
         video: videoIntro,
         title: "les enjeux de genre dans la",
         // subtitle: "THEMATIQUE",
-        text: "VIE ASSOCIATIVE",
-        textprogres: "VIE ASSOCIATIVE",
+        text: " TOILETTES",
+        textprogres: "TOILETTES",
         description:
             "La vie associative est un facteur de gain en capital social et spatial pour les étudiants de l’université de Fianarantsoa. Souvent, les pratiques au sein de cet univers reproduisent des rôles et des attentes genrées, influençant l’attribution des rôles et des responsabilités, les interactions et les opportunités offertes aux individus.",
         buttons: [
@@ -52,8 +52,8 @@ const slides = ref([
         video: video3,
         title: "les enjeux de genre dans l’accès aux",
         // subtitle: "THEMATIQUE",
-        text: "TOILETTES",
-        textprogres: "TOILETTES",
+        text: "VIE ASSOCIATIVE",
+        textprogres: "VIE ASSOCIATIVE",
         description:
             "À l’Université de Fianarantsoa, une analyse des pratiques genrées révèle des disparités marquées entre étudiant·es, personnel administratif et enseignant·es, tant en termes d’accessibilité aux infrastructures sanitaires que de conditions d’usage.",
         buttons: [

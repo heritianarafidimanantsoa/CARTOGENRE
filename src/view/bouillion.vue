@@ -1044,3 +1044,265 @@ canvas {
     max-height: 300px;
 }
 </style>
+
+<!-- navbar -->
+<script setup>
+import { useRoute } from "vue-router";
+const route = useRoute();
+const isHomePage = route.path === "/";
+</script>
+
+<template>
+    <nav
+        :class="[
+            'top-0 w-full z-50 py-6 px-6 lg:px-20 transition-all duration-500 flex items-center justify-between',
+            isHomePage
+                ? 'absolute bg-transparent'
+                : 'relative bg-primary border-b border-gray-200',
+        ]"
+    >
+        <!-- LOGO -->
+        <RouterLink to="/" class="flex items-center space-x-2">
+            <img
+                src="../assets/img/ICOCG.png"
+                alt="Logo Cartogenre"
+                class="w-8 h-8 md:w-10 md:h-10"
+            />
+            <span
+                :class="[
+                    'text-2xl font-poppins font-semibold tracking-widest',
+                    isHomePage ? 'text-white' : 'text-gray-50',
+                ]"
+            >
+                CARTOGENRE
+            </span>
+        </RouterLink>
+
+        <!-- MENU -->
+        <ul class="hidden lg:flex space-x-10 font-poppins text-sm font-medium">
+            <li>
+                <RouterLink
+                    to="/chantierPage"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-6 md:mb-0 md:mr-3 transition-all duration-300"
+                    :class="
+                        isHomePage
+                            ? 'text-white hover:text-primary'
+                            : 'text-gray-50 hover:text-secondary'
+                    "
+                >
+                    <span>Le genre en pratiques</span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 right-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                </RouterLink>
+            </li>
+
+            <li>
+                <RouterLink
+                    to="/statPage"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-6 md:mb-0 md:mr-3 transition-all duration-300"
+                    :class="
+                        isHomePage
+                            ? 'text-white hover:text-primary'
+                            : 'text-gray-50 hover:text-secondary'
+                    "
+                >
+                    <span>Statistiques</span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 right-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                </RouterLink>
+            </li>
+
+            <li>
+                <RouterLink
+                    to="/forumPage"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-0 md:mb-0 md:mr-3 transition-all duration-300"
+                    :class="
+                        isHomePage
+                            ? 'text-white hover:text-primary'
+                            : 'text-gray-50 hover:text-secondary'
+                    "
+                >
+                    <span>Témoignage</span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                    <span
+                        :class="[
+                            'absolute -bottom-1 right-1/2 w-0 h-0.5 transition-all duration-300',
+                            isHomePage ? 'bg-primary' : 'bg-secondary',
+                            'group-hover:w-1/2',
+                        ]"
+                    ></span>
+                </RouterLink>
+            </li>
+        </ul>
+    </nav>
+</template>
+
+<!-- homePage -->
+<section class="relative w-full h-[639px]">
+    <!-- <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover z-0"
+    >
+        <source src="@/assets/img/viedeoacceuille.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la vidéo.
+    </video>
+    <div class="absolute inset-0 bg-black opacity-80 z-0"></div>
+    <div
+        class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6 z-10"
+    >
+        <h1
+            class="font-poppins font-bold text-[2.5em] md:text-[5em] leading-tight text-primary mb-4"
+        >
+            CARTOGENRE
+        </h1>
+
+        <p
+            class="max-w-3xl text-base md:text-xl leading-relaxed font-semibold mb-2"
+        >
+            La culture malgache assigne des rôles distincts à l’homme et à
+            la femme. Ces distinctions façonnent les attentes et les
+            inégalités dans la société contemporaine. « Il n’existe aucune
+            loi qui établisse une différence entre les sexes au sein de
+            l’université de Fianarantsoa: hommes et femmes sont traités de
+            manière égale. Ce sont les pratiques sociales des étudiants qui
+            révèlent les inégalités. » Pr Clarisse RASOAMAMPIONONA
+        </p>
+    </div> -->
+
+    <div class="relative w-full h-screen flex bg-black">
+        <!-- Contenu d'introduction -->
+        <div class="relative w-full h-full">
+            <!-- Grille d'images -->
+            <div class="grid grid-cols-4 h-full w-full gap-0.3">
+                <!-- Vidéo 1 -->
+                <div class="relative w-full h-full">
+                    <video
+                        class="absolute top-0 left-0 w-full h-full object-cover"
+                        autoplay
+                        muted
+                        loop
+                    >
+                        <source
+                            src="@/assets/img/viedeoacceuille.mp4"
+                            type="video/mp4"
+                        />
+                        Votre navigateur ne supporte pas la lecture de
+                        vidéos.
+                    </video>
+                </div>
+
+                <!-- Vidéo 2 -->
+                <div class="relative w-full h-full">
+                    <video
+                        class="absolute top-0 left-0 w-full h-full object-cover"
+                        autoplay
+                        muted
+                        loop
+                    >
+                        <source
+                            src="@/assets/img/slide1.mp4"
+                            type="video/mp4"
+                        />
+                        Votre navigateur ne supporte pas la lecture de
+                        vidéos.
+                    </video>
+                </div>
+
+                <!-- Vidéo 3 -->
+                <div class="relative w-full h-full">
+                    <video
+                        class="absolute top-0 left-0 w-full h-full object-cover"
+                        autoplay
+                        muted
+                        loop
+                    >
+                        <source
+                            src="@/assets/img/slide2.mp4"
+                            type="video/mp4"
+                        />
+                        Votre navigateur ne supporte pas la lecture de
+                        vidéos.
+                    </video>
+                </div>
+
+                <!-- Vidéo 4 -->
+                <div class="relative w-full h-full">
+                    <video
+                        class="absolute top-0 left-0 w-full h-full object-cover"
+                        autoplay
+                        muted
+                        loop
+                    >
+                        <source
+                            src="@/assets/img/slide3.mp4"
+                            type="video/mp4"
+                        />
+                        Votre navigateur ne supporte pas la lecture de
+                        vidéos.
+                    </video>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
+            <!-- Contenu superposé -->
+            <div
+                class="absolute inset-0 flex flex-col items-center justify-center space-y-6 z-10 w-full h-full max-w-[1200px] mx-auto"
+            >
+                <img
+                    src="../assets/img/LOGO CARTOGENRE.png"
+                    alt="Logo Cartogenre"
+                    class="w-24 h-auto mb-2"
+                />
+                <!-- Titre -->
+                <h1
+                    class="font-poppins font-bold text-[2.5em] md:text-[5em] leading-tight text-primary mb-4"
+                >
+                    CARTOGENRE
+                </h1>
+
+                <!-- Texte -->
+                <p
+                    class="max-w-2xl text-sm md:text-base leading-relaxed font-light opacity-80 text-white items-center text-center"
+                >
+                    Un site dédiée à la représentation des expériences
+                    vécues des inégalités entre FEMMES ET HOMMES, dans les
+                    pratiques, les traitements, la façon de penser et la
+                    manière d’être perçu par les autres sur le campus
+                    universitaire d’Andrainjato à Fianarantsoa Madagascar.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

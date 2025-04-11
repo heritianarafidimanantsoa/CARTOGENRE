@@ -195,19 +195,19 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-col h-[639px] relative">
+    <div class="flex flex-col h-auto relative">
         <!-- Titre Dynamique -->
         <div
-            class="absolute top-8 left-[32%] z-20 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-md text-left transform -translate-x-1/2"
+            class="absolute top-10 left-22 sm:left-[20%] z-20 bg-black/30 backdrop-blur-sm px-3 py-2 rounded-md text-left w-[85%] max-w-[250px] sm:max-w-md"
         >
-            <h1 class="text-2xl font-bold text-white">
+            <h1 class="text-[15px] text-center sm:text-lg font-bold text-white">
                 Données par établissement sur
                 <span class="text-secondary">{{ getCurrentTab.label }}</span>
             </h1>
         </div>
 
         <!-- Carte avec props dynamique -->
-        <div class="w-full h-[639px] z-0">
+        <div class="w-full h-[500px] sm:h-[720px] z-0">
             <cartostat
                 :activeTab="activeTab"
                 :currentTabLabel="getCurrentTab.label"
@@ -216,7 +216,7 @@ onMounted(() => {
 
         <!-- Panneau graphique -->
         <div
-            class="absolute top-5 right-10 text-white w-full max-w-lg bg-gray-800/95 backdrop-blur-sm rounded-lg h-[600px] flex flex-col z-30 shadow-lg"
+            class="relative mt-6 sm:absolute sm:top-5 sm:right-10 text-white w-full max-w-full sm:max-w-lg bg-gray-800/95 backdrop-blur-sm rounded-lg sm:h-[600px] flex flex-col z-30 shadow-lg mx-auto"
             ref="chartContainer"
         >
             <!-- Onglets -->
@@ -239,21 +239,21 @@ onMounted(() => {
                     :aria-controls="tab.id"
                 >
                     <i :class="tab.icon" class="text-xl"></i>
-                    <span>{{ tab.label }}</span>
+                    <span class="text-xs sm:text-sm">{{ tab.label }}</span>
                 </button>
             </div>
 
             <!-- Contenu -->
             <div
-                class="flex-1 flex flex-col p-6 justify-center items-center mt-4"
+                class="flex-1 flex flex-col p-4 sm:p-6 justify-center items-center mt-2 sm:mt-4"
             >
                 <div class="text-center mb-2">
                     <h1
-                        class="text-base font-semibold text-white/80 uppercase tracking-wide mb-1"
+                        class="text-sm sm:text-base font-semibold text-white/80 uppercase tracking-wide mb-1"
                     >
                         Données globales sur
                     </h1>
-                    <h2 class="text-lg font-bold text-white">
+                    <h2 class="text-base sm:text-lg font-bold text-white">
                         {{ getCurrentTab.label }}
                     </h2>
                 </div>
@@ -266,15 +266,15 @@ onMounted(() => {
 
             <!-- Établissements -->
             <div
-                class="mt-[-30px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 p-4"
+                class="mt-[-20px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 p-3 sm:p-4"
             >
                 <div
                     v-for="(item, index) in percentages"
                     :key="index"
-                    class="bg-gray-700 p-2 rounded-lg shadow-md flex flex-col items-center min-h-[80px]"
+                    class="bg-gray-700 p-2 rounded-lg shadow-md flex flex-col items-center min-h-[70px]"
                 >
                     <p
-                        class="font-semibold text-white mb-1 text-center text-[12px]"
+                        class="font-semibold text-white mb-1 text-center text-[10px] sm:text-xs"
                     >
                         {{ item.label }}:
                     </p>
@@ -290,7 +290,7 @@ onMounted(() => {
             </div>
         </div>
     </div>
-    <Footer class="mt-16" />
+    <Footer class="mt-10 sm:mt-16" />
 </template>
 
 <style scoped>

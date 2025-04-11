@@ -132,27 +132,40 @@ onMounted(() => {
                             .join("");
 
                         const popupContent = `
-    <div class="p-4 space-y-3 w-72 flex flex-col max-h-[500px] overflow-y-auto">
-        <!-- Titre dynamique h1 -->
-        <h1 class="text-center text-2xl font-bold mb-4 popup-title">${props.currentTabLabel}</h1>
+  <div class="p-4 space-y-3 w-full sm:w-72 max-w-[95vw] text-sm sm:text-base font-poppins">
+    <!-- Titre dynamique -->
+    <h1 class="text-center text-lg sm:text-xl font-bold mb-2 popup-title">
+      ${props.currentTabLabel}
+    </h1>
 
-        <!-- Titre existant h3 avec nom -->
-        <h3 id="chartTitle-${uniqueId}" class="text-center text-lg font-semibold mb-2">${name} - ${selectedFonction.value}</h3>
+    <!-- Nom de l'établissement + fonction -->
+    <h3 id="chartTitle-${uniqueId}" class="text-center text-base sm:text-lg font-semibold mb-3">
+      ${name} - ${selectedFonction.value}
+    </h3>
 
-        <div class="flex items-center justify-between mb-4">
-            <span class="font-medium">Mention:</span>
-            <select id="mentionSelect-${uniqueId}" class="border border-gray-300 rounded px-2 py-1 text-sm">
-                ${mentionOptions}
-            </select>
-            <button id="toggleSelector-${uniqueId}" class="rounded-none border-2 border-blue-500 text-blue-500 py-1 px-4 hover:bg-blue-500 hover:text-white transition-all duration-300">
-                Données Globales
-            </button>
-        </div>
+    <!-- Sélecteur et bouton -->
+    <div class="flex flex-col sm:flex-row sm:items-center gap-2 justify-between mb-3 text-sm">
+      <span class="font-medium">Mention:</span>
+      <select
+        id="mentionSelect-${uniqueId}"
+        class="border border-gray-300 rounded px-2 py-1 text-sm w-full sm:w-auto"
+      >
+        ${mentionOptions}
+      </select>
+      <button
+  id="toggleSelector"
+  class="border border-blue-500 text-blue-500 px-2 py-0.5 rounded text-xs hover:bg-blue-500 hover:text-white transition-all duration-300"
+>
+  Données Globales
+</button>
 
-        <div class="relative w-full h-64">
-            <canvas id="${chartIdPrefix}-active" class="popup-chart absolute inset-0"></canvas>
-        </div>
     </div>
+
+    <!-- Graphique -->
+    <div class="relative w-full h-[200px] sm:h-[240px]">
+      <canvas id="${chartIdPrefix}-active" class="popup-chart absolute inset-0 w-full h-full"></canvas>
+    </div>
+  </div>
 `;
 
                         layer.bindPopup(popupContent, { maxWidth: 300 });

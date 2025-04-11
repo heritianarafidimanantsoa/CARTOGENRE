@@ -12,10 +12,10 @@ const slides = ref([
         video: videoIntro,
         title: "les enjeux de genre dans la",
         // subtitle: "THEMATIQUE",
-        text: " TOILETTES",
-        textprogres: "TOILETTES",
+        text: " TOILETTE",
+        textprogres: "TOILETTE",
         description:
-            "La vie associative est un facteur de gain en capital social et spatial pour les étudiants de l’université de Fianarantsoa. Souvent, les pratiques au sein de cet univers reproduisent des rôles et des attentes genrées, influençant l’attribution des rôles et des responsabilités, les interactions et les opportunités offertes aux individus.",
+            "À l’Université de Fianarantsoa, une analyse des pratiques genrées révèle des disparités marquées entre étudiant·es, personnel administratif et enseignant·es, tant en termes d’accessibilité aux infrastructures sanitaires que de conditions d’usage.",
         buttons: [
             {
                 text: "EN SAVOIR PLUS",
@@ -32,8 +32,8 @@ const slides = ref([
         video: video2,
         title: "les enjeux de genre dans la",
         // subtitle: "THEMATIQUE",
-        text: "MOBILITES",
-        textprogres: "MOBILITES",
+        text: "MOBILITE",
+        textprogres: "MOBILITE",
         description:
             "Un campus fonctionnel et inclusif doit garantir une circulation fluide et sécurisée pour tous, permettant à chacun de rejoindre ses activités académiques et professionnelles dans des conditions optimales.",
         buttons: [
@@ -50,12 +50,12 @@ const slides = ref([
     {
         id: 2,
         video: video3,
-        title: "les enjeux de genre dans l’accès aux",
+        title: "les enjeux de genre dans l’accès à la",
         // subtitle: "THEMATIQUE",
         text: "VIE ASSOCIATIVE",
         textprogres: "VIE ASSOCIATIVE",
         description:
-            "À l’Université de Fianarantsoa, une analyse des pratiques genrées révèle des disparités marquées entre étudiant·es, personnel administratif et enseignant·es, tant en termes d’accessibilité aux infrastructures sanitaires que de conditions d’usage.",
+            "La vie associative est un facteur de gain en capital social et spatial pour les étudiants de l’université de Fianarantsoa. Souvent, les pratiques au sein de cet univers reproduisent des rôles et des attentes genrées, influençant l’attribution des rôles et des responsabilités, les interactions et les opportunités offertes aux individus.",
         buttons: [
             {
                 text: "EN SAVOIR PLUS",

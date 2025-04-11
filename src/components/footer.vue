@@ -104,7 +104,7 @@
                     <span
                         class="font-medium text-white hover:text-white/90 transition"
                     >
-                        RAF.Heritiana · RAF.Ranto · MEC.Daddy · RAD.Fifaliana
+                        RAF.Heritiana · FID.Ranto · MEC.Daddy · RAD.Fifaliana
                     </span>
                 </p>
             </div>

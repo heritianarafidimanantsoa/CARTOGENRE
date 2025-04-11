@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full h-full">
+    <div class="relative w-full min-h-[600px] sm:min-h-[400px] lg:min-h-full">
         <div id="map" class="absolute inset-0"></div>
 
         <!-- Bouton agrandir EN HAUT À GAUCHE -->
@@ -14,49 +14,55 @@
 
         <!-- Coordonnées dynamiques -->
         <div
-            class="absolute bottom-4 left-4 bg-white p-5 rounded-xl shadow-lg space-y-3 z-[1000] w-[270px] border border-gray-200"
+            class="absolute bottom-4 left-2 right-2 sm:left-4 sm:right-auto bg-white px-3 py-3 sm:p-4 rounded-lg shadow-md z-[1000] border border-gray-200 w-auto sm:w-[270px] text-sm"
         >
-            <div class="flex flex-col gap-3">
-                <div>
-                    <label
-                        class="block text-xs font-medium text-gray-700 mb-1 uppercase tracking-wide"
-                        >Latitude</label
-                    >
-                    <input
-                        name="latitude"
-                        v-model="latitude"
-                        type="number"
-                        step="any"
-                        class="border border-gray-300 px-3 py-2 rounded-md w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="Ex: -21.4633"
-                        @change="updatePosition"
-                    />
+            <!-- Mode mobile : flex-col | sm: block -->
+            <div class="flex flex-col sm:block gap-4">
+                <!-- 📍 Champs Latitude / Longitude -->
+                <div class="flex sm:block flex-1 gap-2">
+                    <div class="flex-1">
+                        <label
+                            class="block text-[10px] font-medium text-gray-600 uppercase mb-0.5"
+                        >
+                            Latitude
+                        </label>
+                        <input
+                            v-model="latitude"
+                            type="number"
+                            step="any"
+                            placeholder="-21.4633"
+                            class="w-full px-2 py-1 rounded border border-gray-300 focus:ring-1 focus:ring-primary text-xs"
+                            @change="updatePosition"
+                        />
+                    </div>
+                    <div class="flex-1">
+                        <label
+                            class="block text-[10px] font-medium text-gray-600 uppercase mb-0.5"
+                        >
+                            Longitude
+                        </label>
+                        <input
+                            v-model="longitude"
+                            type="number"
+                            step="any"
+                            placeholder="47.1121"
+                            class="w-full px-2 py-1 rounded border border-gray-300 focus:ring-1 focus:ring-primary text-xs"
+                            @change="updatePosition"
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label
-                        class="block text-xs font-medium text-gray-700 mb-1 uppercase tracking-wide"
-                        >Longitude</label
-                    >
-                    <input
-                        name="longitude"
-                        v-model="longitude"
-                        type="number"
-                        step="any"
-                        class="border border-gray-300 px-3 py-2 rounded-md w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        placeholder="Ex: 47.1121"
-                        @change="updatePosition"
-                    />
-                </div>
-                <div class="flex gap-2">
+
+                <!-- 🎯 Boutons : à droite en mobile, en bas en desktop -->
+                <div class="flex gap-2 sm:mt-3 sm:flex-row">
                     <button
                         @click.prevent="goToCoordinates"
-                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md text-sm transition"
+                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-1.5 rounded text-xs"
                     >
                         Aller
                     </button>
                     <button
                         @click.prevent="clearDynamicMarker"
-                        class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md text-sm transition"
+                        class="flex-1 bg-red-500 hover:bg-red-600 text-white py-1.5 rounded text-xs"
                     >
                         Supprimer
                     </button>

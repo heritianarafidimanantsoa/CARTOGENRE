@@ -1,14 +1,17 @@
-<!-- navbar -->
 <script setup>
+import { ref } from "vue";
 import { useRoute } from "vue-router";
+
 const route = useRoute();
 const isHomePage = route.path === "/";
+const menuOpen = ref(false);
 </script>
 
 <template>
+    <!-- NAVBAR -->
     <nav
         :class="[
-            'top-0 w-full z-50 py-6 px-6 lg:px-20 transition-all duration-500 flex items-center justify-between',
+            'top-0 w-full z-50 py-4 px-6 lg:px-20 transition-all duration-500 flex items-center justify-between',
             isHomePage
                 ? 'absolute bg-transparent'
                 : 'relative bg-primary border-b border-gray-200',
@@ -31,12 +34,25 @@ const isHomePage = route.path === "/";
             </span>
         </RouterLink>
 
-        <!-- MENU -->
+        <!-- BURGER (mobile) -->
+        <button
+            @click="menuOpen = !menuOpen"
+            class="lg:hidden text-white focus:outline-none"
+        >
+            <i
+                :class="[
+                    'text-2xl transition',
+                    menuOpen ? 'fas fa-times' : 'fas fa-bars',
+                ]"
+            ></i>
+        </button>
+
+        <!-- MENU DESKTOP -->
         <ul class="hidden lg:flex space-x-10 font-poppins text-sm font-medium">
             <li>
                 <RouterLink
                     to="/chantierPage"
-                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-6 md:mb-0 md:mr-3 transition-all duration-300"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 transition-all duration-300"
                     :class="
                         isHomePage
                             ? 'text-white hover:text-primary'
@@ -64,7 +80,7 @@ const isHomePage = route.path === "/";
             <li>
                 <RouterLink
                     to="/statPage"
-                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-6 md:mb-0 md:mr-3 transition-all duration-300"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 transition-all duration-300"
                     :class="
                         isHomePage
                             ? 'text-white hover:text-primary'
@@ -92,7 +108,7 @@ const isHomePage = route.path === "/";
             <li>
                 <RouterLink
                     to="/forumPage"
-                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 lg:mr-0 md:mb-0 md:mr-3 transition-all duration-300"
+                    class="relative flex items-center justify-between group text-sm lg:text-base font-poppins font-medium mb-2 transition-all duration-300"
                     :class="
                         isHomePage
                             ? 'text-white hover:text-primary'
@@ -118,4 +134,71 @@ const isHomePage = route.path === "/";
             </li>
         </ul>
     </nav>
+
+    <!-- MENU MOBILE -->
+    <transition name="slide-top">
+        <div v-if="menuOpen" class="lg:hidden fixed inset-0 z-40">
+            <!-- Overlay cliquable -->
+            <div
+                class="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                @click.self="menuOpen = false"
+            ></div>
+
+            <!-- Contenu du menu (slide from top) -->
+            <div
+                class="absolute top-0 left-0 w-full bg-primary/90 px-6 py-10 space-y-6 text-white font-poppins text-lg z-50"
+            >
+                <RouterLink
+                    to="/chantierPage"
+                    class="block mt-10"
+                    @click="menuOpen = false"
+                >
+                    Le genre en pratiques
+                </RouterLink>
+                <RouterLink
+                    to="/statPage"
+                    class="block"
+                    @click="menuOpen = false"
+                >
+                    Statistiques
+                </RouterLink>
+                <RouterLink
+                    to="/forumPage"
+                    class="block"
+                    @click="menuOpen = false"
+                >
+                    Témoignage
+                </RouterLink>
+            </div>
+        </div>
+    </transition>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.slide-top-enter-active,
+.slide-top-leave-active {
+    transition: all 0.3s ease;
+}
+.slide-top-enter-from {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+.slide-top-enter-to {
+    transform: translateY(0);
+    opacity: 1;
+}
+.slide-top-leave-to {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+</style>

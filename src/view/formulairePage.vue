@@ -4,25 +4,25 @@
             <div
                 class="flex flex-col lg:flex-row bg-white rounded-2xl shadow-xl overflow-hidden"
             >
-                <!-- Carte -->
+                <!-- 📍 Carte -->
                 <div
-                    class="lg:w-1/2 w-full bg-primary flex items-center justify-center"
+                    class="w-full lg:w-1/2 min-h-[600px] sm:min-h-[400px] lg:min-h-full relative"
                 >
                     <Cartexpression v-model="position" />
                 </div>
 
-                <!-- Formulaire -->
+                <!-- 📝 Formulaire -->
                 <div
-                    class="lg:w-1/2 w-full bg-secondary px-8 py-10 flex items-center"
+                    class="w-full lg:w-1/2 bg-secondary px-6 sm:px-8 py-10 flex items-center"
                 >
                     <form
                         @submit.prevent="handleSubmit"
                         class="w-full max-w-lg mx-auto space-y-6"
                     >
-                        <!-- Titre intégré -->
+                        <!-- Titre -->
                         <div class="text-center">
                             <h2
-                                class="text-3xl font-bold text-primary mb-4 font-poppins"
+                                class="text-3xl sm:text-5xl font-bold text-primary mb-2 font-poppins"
                             >
                                 EXPRIMEZ-VOUS
                             </h2>
@@ -37,8 +37,9 @@
                             <label
                                 for="genre"
                                 class="block mb-1 text-sm font-medium text-white"
-                                >Vous êtes :</label
                             >
+                                Vous êtes :
+                            </label>
                             <select
                                 id="genre"
                                 name="genre"
@@ -57,8 +58,9 @@
                             <label
                                 for="feedbackType"
                                 class="block mb-1 text-sm font-medium text-white"
-                                >Que s'est-il passé ?</label
                             >
+                                Que s'est-il passé ?
+                            </label>
                             <select
                                 id="feedbackType"
                                 name="feedbackType"
@@ -78,8 +80,10 @@
                             <label
                                 for="lieu"
                                 class="block mb-1 text-sm font-medium text-white"
-                                >Sélectionnez le lieu sur la carte et indiquez son nom ici</label
                             >
+                                Sélectionnez le lieu sur la carte et indiquez
+                                son nom ici
+                            </label>
                             <input
                                 type="text"
                                 id="lieu"
@@ -89,13 +93,14 @@
                             />
                         </div>
 
-                        <!-- Message et actions -->
+                        <!-- Message -->
                         <div class="bg-white shadow rounded-lg p-4">
                             <label
                                 for="message"
                                 class="block text-sm font-medium text-gray-700 mb-2"
-                                >Votre message :</label
                             >
+                                Votre message :
+                            </label>
                             <textarea
                                 id="message"
                                 name="message"
@@ -104,10 +109,11 @@
                                 class="w-full p-3 text-gray-800 rounded-lg border border-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-primary"
                             ></textarea>
 
+                            <!-- Actions -->
                             <div
-                                class="flex items-center justify-start gap-6 mt-4"
+                                class="flex flex-wrap items-center justify-start gap-4 mt-4"
                             >
-                                <!-- Upload image -->
+                                <!-- Image -->
                                 <label
                                     for="file-upload"
                                     class="cursor-pointer flex items-center gap-2 text-sm text-gray-600 hover:text-green-600"
@@ -147,7 +153,7 @@
                                     }}</span>
                                 </button>
 
-                                <!-- Affichage durée -->
+                                <!-- Durée -->
                                 <span
                                     v-if="isRecording"
                                     class="text-sm text-red-600 font-semibold"
@@ -156,7 +162,7 @@
                                 </span>
                             </div>
 
-                            <!-- Aperçu image sélectionnée -->
+                            <!-- Aperçu image -->
                             <div
                                 v-if="imagePreview"
                                 class="mt-4 relative inline-block"
@@ -173,7 +179,7 @@
                                 </button>
                             </div>
 
-                            <!-- Aperçu de l'audio enregistré -->
+                            <!-- Aperçu audio -->
                             <div
                                 v-if="audioBlob"
                                 class="mt-4 flex items-center gap-3"
@@ -182,7 +188,7 @@
                                     :src="audioUrl"
                                     controls
                                     class="w-full rounded-lg shadow"
-                                ></audio>
+                                />
                                 <button
                                     @click="clearAudio"
                                     type="button"
@@ -194,7 +200,7 @@
                             </div>
                         </div>
 
-                        <!-- Message de confirmation -->
+                        <!-- Confirmation -->
                         <div
                             v-if="successMessage"
                             class="text-green-500 text-sm text-center"
@@ -202,7 +208,7 @@
                             {{ successMessage }}
                         </div>
 
-                        <!-- Bouton envoyer -->
+                        <!-- Bouton ENVOYER -->
                         <button
                             type="submit"
                             class="w-full inline-block text-center px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/80 transition duration-200"

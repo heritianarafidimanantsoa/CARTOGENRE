@@ -198,7 +198,7 @@ onMounted(() => {
     <div class="flex flex-col h-auto relative">
         <!-- Titre Dynamique -->
         <div
-            class="absolute top-10 left-22 sm:left-[20%] z-20 bg-black/30 backdrop-blur-sm px-3 py-2 rounded-md text-left w-[85%] max-w-[250px] sm:max-w-md"
+            class="absolute top-10 left-23 sm:left-[20%] z-20 bg-black/30 backdrop-blur-sm px-3 py-2 rounded-md text-left w-[85%] max-w-[250px] sm:max-w-md"
         >
             <h1 class="text-[15px] text-center sm:text-lg font-bold text-white">
                 Données par établissement sur

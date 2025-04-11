@@ -192,7 +192,7 @@ onMounted(() => {
 
 <template>
     <div
-        class="relative w-full h-[639px] overflow-hidden carousel-wrapper"
+        class="relative w-full h-[100vh] overflow-hidden carousel-wrapper"
         @mouseenter="isHovered = true"
         @mouseleave="isHovered = false"
     >
@@ -208,7 +208,7 @@ onMounted(() => {
                 <video
                     ref="videoElements"
                     :src="slide.video"
-                    class="absolute inset-0 w-full h-[695px] object-cover z-0"
+                    class="absolute inset-0 w-full h-[100vh] object-cover z-0"
                     autoplay
                     muted
                     @ended="handleVideoEnd"
@@ -218,28 +218,34 @@ onMounted(() => {
                 ></div>
 
                 <div
-                    class="absolute content-block top-[30%] w-[1140px] max-w-[80%] left-1/2 -translate-x-1/2 pr-[30%] box-border text-white drop-shadow-[0_5px_10px_#0007] z-20"
+                    class="absolute content-block top-[60%] sm:top-[50%] md:top-[40%] lg:top-[110%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] sm:w-[90%] md:w-[80%] px-4 sm:px-0 pr-0 md:pr-[25%] text-white drop-shadow-[0_5px_10px_#0007] z-20"
                 >
                     <div
-                        class="author font-poppins font-bold tracking-[10px] animate-slide-content"
+                        class="author font-poppins font-bold tracking-[6px] sm:tracking-[8px] md:tracking-[10px] animate-slide-content text-center sm:text-left"
                     >
                         {{ slide.title }}
                     </div>
+
                     <div
-                        class="title font-poppins font-bold text-[5em] leading-[1.3em] animate-slide-content"
+                        class="title font-poppins font-bold text-[2em] sm:text-[3em] md:text-[4em] lg:text-[5em] leading-[1.3em] animate-slide-content text-center sm:text-left"
                     >
                         {{ slide.subtitle }}
                     </div>
+
                     <div
-                        class="topic font-poppins font-bold text-[5em] leading-[1.3em] text-primary animate-slide-content"
+                        class="topic font-poppins font-bold text-[2em] sm:text-[3em] md:text-[4em] lg:text-[5em] leading-[1.3em] text-primary animate-slide-content text-center sm:text-left mb-4"
                     >
                         {{ slide.text }}
                     </div>
-                    <div class="des mt-4 max-w-xl animate-slide-content">
+
+                    <div
+                        class="des mt-4 max-w-xl animate-slide-content text-center sm:text-left mx-auto sm:mx-0"
+                    >
                         {{ slide.description }}
                     </div>
+
                     <div
-                        class="grid [grid-template-columns:repeat(2,190px)] [grid-template-rows:40px] gap-[5px] mt-[20px] animate-slide-content"
+                        class="grid grid-cols-1 sm:[grid-template-columns:repeat(2,190px)] [grid-template-rows:40px] gap-[10px] mt-[20px] animate-slide-content justify-center sm:justify-start"
                     >
                         <button
                             v-for="(button, buttonIndex) in slide.buttons"
@@ -455,6 +461,7 @@ onMounted(() => {
     }
 }
 
+/* 📱 Mobile : jusqu’à 640px */
 @media (max-width: 640px) {
     .title,
     .topic {
@@ -469,8 +476,10 @@ onMounted(() => {
         margin: 0 auto;
     }
     .content-block {
-        top: 10% !important;
+        top: 50% !important;
         padding: 0 1rem !important;
+
+        text-align: center;
     }
     .w-12.h-12 {
         width: 44px !important;
@@ -478,6 +487,48 @@ onMounted(() => {
     }
     .video-modal {
         height: auto;
+    }
+}
+
+/* 📲 Tablette : 641px à 1024px */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .title,
+    .topic {
+        font-size: 3.2em;
+        text-align: center;
+    }
+    .author,
+    .des,
+    .grid {
+        text-align: center;
+        margin: 0 auto;
+    }
+    .content-block {
+        top: 50% !important;
+        padding: 0 2rem !important;
+
+        text-align: center;
+    }
+}
+
+/* 💻 Ordinateur (desktop) : à partir de 1025px */
+@media (min-width: 1025px) {
+    .title,
+    .topic {
+        font-size: 5em;
+        text-align: left;
+    }
+    .author,
+    .des,
+    .grid {
+        text-align: left;
+    }
+    .content-block {
+        top: 45% !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+
+        text-align: left;
     }
 }
 </style>
